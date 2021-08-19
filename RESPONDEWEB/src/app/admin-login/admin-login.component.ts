@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-admin-login',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLoginComponent implements OnInit {
 
-  constructor() { }
+  adminLogin: FormGroup = new FormGroup({
+    "email": new FormControl,
+    "password": new FormControl
+  })
 
-  ngOnInit(): void {
+  
+  constructor(
+    private authService:AuthService
+  ) { }
+
+  ngOnInit() {
+  }
+onSubmit(){
+  if (this.adminLogin.valid){
+    console.log(this.adminLogin.value);
+    this.authService.login(
+      this.adminLogin.value.email,
+      this.adminLogin.value.password
+    )
   }
 
+}
 }

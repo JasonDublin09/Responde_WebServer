@@ -33,18 +33,18 @@
                 <div class="card">
                     <div class="card-header">Login</div>
                     <div class="card-body">
-                        <form action="" method="">
+                        <form [formGroup]="adminLogin" (ngSubmit)='onSubmit()'>
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="email_address" class="form-control" name="email-address"  autofocus>
+                                    <input type="text" placeholder="Email Address" formControlName="email" class="input-text"   required >
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                 <div class="col-md-6">
-                                    <input type="password" id="password" class="form-control" name="password" >
+                                    <input type="password" placeholder="Password" formControlName="password" class="input-text" required  >
                                 </div>
                             </div>
 
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="col-md-6 offset-md-4">
-                                <button routerLink="dashboard"class="btn btn-primary">
+                                <button type="submit" [disabled]="!adminLogin.valid" class="auth-btn">
                                     LOGIN
                                 </button>
                                 <a href="#" class="btn btn-link">

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "responde-4d141": {
+      "hosting": {
+        "RESPONDEWEB": [
+          "responde-4d141"
+        ]
+      }
+    }
+  }
+}

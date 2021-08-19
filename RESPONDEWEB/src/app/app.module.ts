@@ -8,6 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -15,12 +20,18 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     DashboardComponent,
     SidenavComponent,
     AdminLoginComponent,
+    
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule, 
+    ReactiveFormsModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     RouterModule.forRoot([
       {path:'',component:AdminLoginComponent},
       {path:'dashboard', component:DashboardComponent}
