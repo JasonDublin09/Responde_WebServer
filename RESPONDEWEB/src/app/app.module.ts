@@ -5,14 +5,25 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+/* Pages */
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReportHistoryComponent } from './report-history/report-history.component';
+import { IncomingReportComponent } from './incoming-report/incoming-report.component';
+import { TopbarComponent } from './topbar/topbar.component';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ChangeEmailComponent } from './change-email/change-email.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
+import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +31,14 @@ import { environment } from '../environments/environment';
     DashboardComponent,
     SidenavComponent,
     AdminLoginComponent,
-    
-   
+    ReportHistoryComponent,
+    IncomingReportComponent,
+    TopbarComponent,
+    ProfilePageComponent,
+    ChangeEmailComponent,
+    ChangePasswordComponent,
+    ChangeEmailVerificationComponent,
+    ChangePasswordVerificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +49,18 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatTableModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path:'',component:AdminLoginComponent},
-      {path:'dashboard', component:DashboardComponent}
+      {path:'dashboard', component:DashboardComponent},
+      {path:'report-history', component:ReportHistoryComponent},
+      {path:'incoming-report', component:IncomingReportComponent},
+      {path:'profile', component:ProfilePageComponent},
+      {path:'change-email', component:ChangeEmailComponent},
+      {path:'change-password', component:ChangePasswordComponent},
+      {path:'change-email-verification', component:ChangePasswordVerificationComponent},
+      {path:'change-password-verification', component:ChangePasswordVerificationComponent}
       
     ])
     
