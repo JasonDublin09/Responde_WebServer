@@ -24,6 +24,7 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ChangePasswordVerificationComponent } from './change-password-verificat
     ChangePasswordComponent,
     ChangeEmailVerificationComponent,
     ChangePasswordVerificationComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { ChangePasswordVerificationComponent } from './change-password-verificat
       {path:'change-email', component:ChangeEmailComponent},
       {path:'change-password', component:ChangePasswordComponent},
       {path:'change-email-verification', component:ChangeEmailVerificationComponent},
-      {path:'change-password-verification', component:ChangePasswordVerificationComponent}
+      {path:'change-password-verification', component:ChangePasswordVerificationComponent},
+      {path:'reset-password', component:ResetPasswordComponent},
       
     ])
     
