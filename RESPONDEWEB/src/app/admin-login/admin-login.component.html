@@ -2,72 +2,95 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="admin-login.component.css">
-    <link rel="icon" href="Favicon.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="admin-login.component.css">
+<link rel="icon" href="Favicon.png">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="#">RESPONDE</a>
+        <a class="navbar-brand" href="#" style="text-align: left;">RESPONDE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        
+
     </div>
 </nav>
-<div class="container">
 
-</div>
 
-<main class="login-form">
-    <div class="cotainer">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Login</div>
-                    <div class="card-body">
-                        <form [formGroup]="adminLogin" (ngSubmit)='onSubmit()'>
-                            <div class="form-group row">
-                                <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                                <div class="col-md-6">
-                                    <input type="text" placeholder="Email Address" formControlName="email" class="input-text"   required >
+<div>
+    <div id="log-in">
+        <form class="login-form">
+            <h1 class="login-heading">Login</h1>
+            <!-- <p class="login-copy">A subtitle for a simple responsive login box</p> -->
+            <div class="field-container -username">
+
+                <input type="email" placeholder="Email" formControlName="email" required/>
+            </div>
+            <div class="field-container -password">
+
+                <input type="password" placeholder="Password" formControlName="password" required/>
+            </div>
+            <button style="color: #fff;" type="submit" [disabled]="!adminLogin.valid" class="auth-btn log-in-button bg-primary">
+            Log in
+        </button>
+            <!-- forgot password -->
+            <a href="#forgot-password" class="btn forgot-password-link forgot-password-trigger " data-target="#myModal" data-toggle="modal">
+            Forgot Your Password?
+        </a>
+
+            <!-- Modal -->
+            <script>
+                $('input').focus(function() {
+                    var input = $(this);
+                    input.closest('.field-container').addClass('-focused');
+                });
+
+                $('input').blur(function() {
+                    var input = $(this);
+                    if (input.val().length === 0) {
+                        input.closest('.field-container').removeClass('-focused');
+                    }
+                });
+            </script>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+
+                    <div class="modal-content">
+                        <div class="modal-header row">
+                            <h4 class="modal-title">Forgot Password</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form class="login-form">
+                                <p class="login-copy">Enter admin email where password reset link will be sent.</p>
+                                <div class="field-container -username">
+
+                                    <input type="email" placeholder="Email" formControlName="email" required/>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                                <div class="col-md-6">
-                                    <input type="password" placeholder="Password" formControlName="password" class="input-text" required  >
-                                </div>
-                            </div>
+                                <button style="color: #fff;" type="submit" [disabled]="!adminLogin.valid" class="auth-btn log-in-button bg-primary">Send Email</button>
+                            </form>
+                        </div>
 
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-4">
-                                    
-                                </div>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
 
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" [disabled]="!adminLogin.valid" class="auth-btn">
-                                    LOGIN
-                                </button>
-                                <a href="#" class="btn btn-link">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                    
-                    </form>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
 
-</main>
+
+        </form>
+    </div>
+</div>

@@ -3,6 +3,8 @@
     border-radius: 10px;
     padding: 10px;
     padding-left: 15px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2);
+    margin-left: 10px;
 }
 
 .h4 {
@@ -36,6 +38,7 @@
     transition: box-shadow 0.2s;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .edit-profile-button::-moz-focus-inner {

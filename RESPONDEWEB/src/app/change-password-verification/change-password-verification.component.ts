@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-change-password-verification',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordVerificationComponent implements OnInit {
 
-  constructor() { }
+  adminLogin: FormGroup = new FormGroup({
+    "email": new FormControl,
+    "password": new FormControl
+  })
+  constructor(
+    private authService:AuthService
+  ) { }
 
   ngOnInit(): void {
   }
-
+  onSubmit(){
+    if (this.adminLogin.valid){
+      console.log(this.adminLogin.value);
+      this.authService.login(
+        this.adminLogin.value.email,
+        this.adminLogin.value.password
+      )
+    }
+  
+  }
 }

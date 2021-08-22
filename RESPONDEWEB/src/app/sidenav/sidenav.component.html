@@ -9,7 +9,8 @@
         font-weight: bold;
     }
     
-    .link {
+    .link,
+    .sidebar-brand-text {
         cursor: pointer;
     }
 </style>
@@ -18,20 +19,23 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <!-- logo -->
-            <img src="https://img.icons8.com/ios-glyphs/30/000000/fire-element--v1.png" />
-        </div>
-        <div class="sidebar-brand-text mx-3">RESPONDE Admin</div>
-    </a>
+    <div routerLink="dashboard">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href='dashboard'>
+            <div class="sidebar-brand-icon rotate-n-15">
+                <!-- logo -->
+                <a href="dashboard"><img src="https://img.icons8.com/ios-glyphs/30/000000/fire-element--v1.png" /></a>
+
+            </div>
+            <div class="sidebar-brand-text mx-3">RESPONDE Admin</div>
+        </a>
+    </div>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active link" routerLink="">
-        <a class="nav-link" routerLink="dashboard">
+    <li class="nav-item active link" routerLink="dashboard">
+        <a class="nav-link" href="dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>

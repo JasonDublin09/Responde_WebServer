@@ -59,7 +59,7 @@ import { ChangePasswordVerificationComponent } from './change-password-verificat
       {path:'profile', component:ProfilePageComponent},
       {path:'change-email', component:ChangeEmailComponent},
       {path:'change-password', component:ChangePasswordComponent},
-      {path:'change-email-verification', component:ChangePasswordVerificationComponent},
+      {path:'change-email-verification', component:ChangeEmailVerificationComponent},
       {path:'change-password-verification', component:ChangePasswordVerificationComponent}
       
     ])
