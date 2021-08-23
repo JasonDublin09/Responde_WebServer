@@ -17,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportHistoryComponent } from './report-history/report-history.component';
 import { IncomingReportComponent } from './incoming-report/incoming-report.component';
 import { TopbarComponent } from './topbar/topbar.component';
-import { MatTableModule } from '@angular/material/table';
+/* import { MatTableModule } from '@angular/material/table'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
@@ -25,6 +25,23 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+/* import { MatPaginatorModule } from '@angular/material/paginator'; */
+import {CdkTableModule} from '@angular/cdk/table';
+import { MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
+@NgModule({
+  exports: [
+    CdkTableModule,
+
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+  ]
+})
+export class MaterialModule {}
 
 @NgModule({
   declarations: [
@@ -51,7 +68,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MaterialModule,
+    
     BrowserAnimationsModule,
     RouterModule.forRoot([
       {path:'',component:AdminLoginComponent},
