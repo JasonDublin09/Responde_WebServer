@@ -19,7 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportHistoryComponent } from './report-history/report-history.component';
 import { IncomingReportComponent } from './incoming-report/incoming-report.component';
 import { TopbarComponent } from './topbar/topbar.component';
-import { MatTableModule } from '@angular/material/table';
+/* import { MatTableModule } from '@angular/material/table'; */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
@@ -28,6 +28,24 @@ import { ChangeEmailVerificationComponent } from './change-email-verification/ch
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 import { AdminLoginGuard } from './route-guard/admin-login.guard';
 
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+/* import { MatPaginatorModule } from '@angular/material/paginator'; */
+import {CdkTableModule} from '@angular/cdk/table';
+import { MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
+@NgModule({
+  exports: [
+    CdkTableModule,
+
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+  ]
+})
+export class MaterialModule {}
 
 @NgModule({
   declarations: [
@@ -43,6 +61,7 @@ import { AdminLoginGuard } from './route-guard/admin-login.guard';
     ChangePasswordComponent,
     ChangeEmailVerificationComponent,
     ChangePasswordVerificationComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +72,12 @@ import { AdminLoginGuard } from './route-guard/admin-login.guard';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MaterialModule,
+    
     BrowserAnimationsModule,
     RouterModule.forRoot([
       {path:'',component:AdminLoginComponent,canActivate:[AdminLoginGuard]},
@@ -64,7 +88,8 @@ import { AdminLoginGuard } from './route-guard/admin-login.guard';
       {path:'change-email', component:ChangeEmailComponent},
       {path:'change-password', component:ChangePasswordComponent},
       {path:'change-email-verification', component:ChangeEmailVerificationComponent},
-      {path:'change-password-verification', component:ChangePasswordVerificationComponent}
+      {path:'change-password-verification', component:ChangePasswordVerificationComponent},
+      {path:'reset-password', component:ResetPasswordComponent},
       
     ])
     

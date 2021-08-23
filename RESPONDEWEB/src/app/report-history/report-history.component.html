@@ -30,37 +30,37 @@
 
                         <!-- ID Column -->
                         <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                         </ng-container>
 
                         <!-- Report ID Column -->
                         <ng-container matColumnDef="report_id">
-                            <th mat-header-cell *matHeaderCellDef> Report ID </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Report ID </th>
                             <td mat-cell *matCellDef="let element"> {{element.report_id}} </td>
                         </ng-container>
 
                         <!-- Reporter Name Column -->
                         <ng-container matColumnDef="reporter_name">
-                            <th mat-header-cell *matHeaderCellDef> Reporter Name </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Reporter Name </th>
                             <td mat-cell *matCellDef="let element"> {{element.reporter_name}} </td>
                         </ng-container>
 
                         <!-- Date Column -->
                         <ng-container matColumnDef="date">
-                            <th mat-header-cell *matHeaderCellDef> Date </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
                             <td mat-cell *matCellDef="let element"> {{element.date}} </td>
                         </ng-container>
 
                         <!-- Status Column -->
                         <ng-container matColumnDef="status">
-                            <th mat-header-cell *matHeaderCellDef> Status </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                             <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                         </ng-container>
 
                         <!-- Actions Column -->
                         <ng-container matColumnDef="actions">
-                            <th mat-header-cell *matHeaderCellDef> Actions </th>
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                             <td mat-cell *matCellDef="let row">
                                 <button class="pure-material-button-contained" mat-button>View</button>
                             </td>
@@ -69,6 +69,9 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+                    </mat-paginator>
 
                 </div>
 
