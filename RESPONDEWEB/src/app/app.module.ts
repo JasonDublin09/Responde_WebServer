@@ -10,6 +10,8 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AdminGuardGuard } from './route-guard/admin-guard.guard';
 /* Pages */
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -24,6 +26,8 @@ import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
+import { AdminLoginGuard } from './route-guard/admin-login.guard';
+
 
 @NgModule({
   declarations: [
@@ -52,8 +56,8 @@ import { ChangePasswordVerificationComponent } from './change-password-verificat
     MatTableModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {path:'',component:AdminLoginComponent},
-      {path:'dashboard', component:DashboardComponent},
+      {path:'',component:AdminLoginComponent,canActivate:[AdminLoginGuard]},
+      {path:'dashboard', component:DashboardComponent,canActivate:[AdminGuardGuard]},
       {path:'report-history', component:ReportHistoryComponent},
       {path:'incoming-report', component:IncomingReportComponent},
       {path:'profile', component:ProfilePageComponent},
@@ -65,7 +69,7 @@ import { ChangePasswordVerificationComponent } from './change-password-verificat
     ])
     
   ],
-  providers: [],
+  providers: [AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

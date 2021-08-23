@@ -27,7 +27,7 @@
 
 <div>
     <div id="log-in">
-        <form class="login-form">
+        <form class="login-form" [formGroup]="adminLogin" (ngSubmit)="onSubmit()">
             <h1 class="login-heading">Login</h1>
             <!-- <p class="login-copy">A subtitle for a simple responsive login box</p> -->
             <div class="field-container -username">
@@ -45,6 +45,7 @@
             <a href="#forgot-password" class="btn forgot-password-link forgot-password-trigger " data-target="#myModal" data-toggle="modal">
             Forgot Your Password?
         </a>
+        </form>
 
             <!-- Modal -->
             <script>
@@ -75,10 +76,10 @@
                                 <p class="login-copy">Enter admin email where password reset link will be sent.</p>
                                 <div class="field-container -username">
 
-                                    <input type="email" placeholder="Email" formControlName="email" required/>
+                                    <input type="email" placeholder="Email" required/>
                                 </div>
 
-                                <button style="color: #fff;" type="submit" [disabled]="!adminLogin.valid" class="auth-btn log-in-button bg-primary">Send Email</button>
+                                <button style="color: #fff;" type="submit" class="auth-btn log-in-button bg-primary">Send Email</button>
                             </form>
                         </div>
 
@@ -89,8 +90,5 @@
 
                 </div>
             </div>
-
-
-        </form>
     </div>
 </div>
