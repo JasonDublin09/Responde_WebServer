@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
     private afauth:AuthService
   ){}
   ngOnInit() {
-    this.afauth.isLoggedin()
+    //this.afauth.isLoggedin()
   }
   
 }

@@ -29,9 +29,10 @@ export class AuthService {
 
   
   login(email:string, password:string)
-  { this.afAuth.setPersistence('session').then(()=>this.afAuth.signInWithEmailAndPassword(email,password).then(data=>{this.currentuser=data.user,this.router.navigateByUrl('dashboard')})
+  { this.afAuth.setPersistence('session').then(()=>this.afAuth.signInWithEmailAndPassword(email,password).then(data=>{console.log(data),this.router.navigateByUrl('dashboard')})
   .catch(err => {console.log("Something went wrong", err.message)})
   )
+  this.autologin()
   console.log(this.currentuser)
 };
 
@@ -55,6 +56,11 @@ export class AuthService {
     else{
       return this.router.navigate([''])
     }
+  }
+
+  resetpassword(email:string){
+    this.afAuth.sendPasswordResetEmail(email).then(()=>{console.log("Reset Sent")}).catch((error)=>{var ErrorCode=error.code;
+      console.log(ErrorCode)})
   }
 
  

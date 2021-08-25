@@ -16,6 +16,9 @@ import 'firebase/auth';
 export class AdminLoginComponent implements OnInit {
 
   admindata: any;
+  resetpass:FormGroup= new FormGroup({
+    "reset":new FormControl(null,[Validators.required,Validators.email])
+  })
   
 
 
@@ -41,5 +44,11 @@ onSubmit(){
     )}
 
   }
+
+reset(){
+    console.log(this.resetpass.value.reset);
+    this.authService.resetpassword(this.resetpass.value.reset)
+  
+}
 }
 
