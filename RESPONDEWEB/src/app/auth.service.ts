@@ -1,34 +1,68 @@
-import { Injectable } from '@angular/core';
+import { Injectable,NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore,AngularFirestoreDocument, ENABLE_PERSISTENCE } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
+import { AngularFireAuth, PERSISTENCE } from '@angular/fire/auth';
+import 'firebase/auth'
+import {first,switchMap, take} from 'rxjs/operators';
+import { UserModel } from './model/user-model'; 
+import { Observable, of } from 'rxjs';
 
-import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  currentuser:any;
+  admindata:any;
+  user:any
+
   constructor(
     private afAuth: AngularFireAuth,
-    private router: Router
-  ) { }
+    private router: Router,
+    private ngZone: NgZone,
+    private afs: AngularFirestore
+  ) {
+   }
 
-  login(email:string, password:string){
-  this.afAuth.signInWithEmailAndPassword(email,password).then(value => {
-    console.log("Login Success");this.router.navigateByUrl('/dashboard');
-  })
-  .catch(err => {console.log("Something went wrong", err.message);});
-  }
+  
+  login(email:string, password:string)
+  { this.afAuth.setPersistence('session').then(()=>this.afAuth.signInWithEmailAndPassword(email,password).then(data=>{console.log(data),this.router.navigateByUrl('dashboard')})
+  .catch(err => {console.log("Something went wrong", err.message)})
+  )
+  this.autologin()
+  console.log(this.currentuser)
+};
 
   logout() {
-    this.afAuth.signOut().then(() => {
-      this.router.navigate(['/']);
-    });
-  }
+    this.afAuth.signOut()
+      this.router.navigateByUrl('');
+    };
+  
   private oAuthLogin(provider:any){
     return this.afAuth.signInWithPopup(provider)
   } 
+
+  isLoggedin(){
+    return this.afAuth.authState.pipe(take(1)).toPromise();
+  }
+
+  autologin(){
+    if (this.afAuth.authState){
+      return this.router.navigate(['dashboard'])
+    }
+    else{
+      return this.router.navigate([''])
+    }
+  }
+
+  resetpassword(email:string){
+    this.afAuth.sendPasswordResetEmail(email).then(()=>{console.log("Reset Sent")}).catch((error)=>{var ErrorCode=error.code;
+      console.log(ErrorCode)})
+  }
+
+ 
 }
 
