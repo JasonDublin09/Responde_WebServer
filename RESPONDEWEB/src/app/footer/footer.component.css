@@ -1,0 +1,22 @@
+/* #footer {
+    margin-top: 50px;
+    clear: both;
+    padding: 3em;
+    background: #333;
+    color: #fff;
+    height: 50px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+} */
+
+#footer {
+    bottom: 0;
+    color: #707070;
+    height: 50px;
+    left: 0;
+    position: sticky;
+    font-size: small;
+    width: 100%;
+    z-index: 1;
+}

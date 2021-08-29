@@ -26,23 +26,14 @@ import { ChangeEmailVerificationComponent } from './change-email-verification/ch
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-/* import { MatPaginatorModule } from '@angular/material/paginator'; */
+/* Table */
 import {CdkTableModule} from '@angular/cdk/table';
 import { MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
-
-@NgModule({
-  exports: [
-    CdkTableModule,
-
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
-  ]
-})
-export class MaterialModule {}
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +49,7 @@ export class MaterialModule {}
     ChangeEmailVerificationComponent,
     ChangePasswordVerificationComponent,
     ResetPasswordComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +64,8 @@ export class MaterialModule {}
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MaterialModule,
+    MatFormFieldModule,
+    MatInputModule,
     
     BrowserAnimationsModule,
     RouterModule.forRoot([

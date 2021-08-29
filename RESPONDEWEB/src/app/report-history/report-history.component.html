@@ -18,15 +18,22 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Reports History</h1>
+                    <h1 class="h3 mb-0 text-gray-800" style="padding-left:10px;">Reports History</h1>
                 </div>
 
                 <!-- Content Row -->
 
-                <div class="row table-wrapper">
+                <div class="example-header">
+                    <mat-form-field style="margin-left:-15px;">
+                        <mat-label>Filter</mat-label>
+                        <input (keyup)="applyFilter($event)" class="" matInput placeholder="Filter" #input>
+                    </mat-form-field>
+                </div>
+                <!-- class="mat-elevation-z8" -->
+                <div class="row table-wrapper mat-elevation-z8">
 
-                    <!-- Table -->
-                    <table mat-table [dataSource]="dataSource" class="data-table">
+                    <!-- Table class="data-table" -->
+                    <mat-table [dataSource]="dataSource" matSort class="data-table">
 
                         <!-- ID Column -->
                         <ng-container matColumnDef="id">
@@ -60,18 +67,23 @@
 
                         <!-- Actions Column -->
                         <ng-container matColumnDef="actions">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                            <th mat-header-cell *matHeaderCellDef> Actions </th>
                             <td mat-cell *matCellDef="let row">
                                 <button class="pure-material-button-contained" mat-button>View</button>
                             </td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
+                        <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-                    </mat-paginator>
+                        <!-- Row shown when there is no matching data. -->
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr>
+                    </mat-table>
+
+
+                    <mat-paginator [pageSizeOptions]="[1,3,5, 10]" showFirstLastButtons></mat-paginator>
 
                 </div>
 
@@ -79,13 +91,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
+            <app-footer></app-footer>
             <!-- End of Footer -->
 
         </div>

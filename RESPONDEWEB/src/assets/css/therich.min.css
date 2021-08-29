@@ -10119,17 +10119,24 @@
  }
  
  #wrapper {
-     display: flex
+     display: flex;
+     overflow: hidden;
+     height: 100%;
+     min-height: 100%;
+ }
+ 
+ #content-wrapper {
+     overflow-y: hidden;
  }
  
  #wrapper #content-wrapper {
      background-color: #f8f9fc;
      width: 100%;
-     overflow-x: hidden
  }
  
  #wrapper #content-wrapper #content {
-     flex: 1 0 auto
+     height: 100%;
+     flex: 1 0 auto;
  }
  
  .container,
@@ -10649,7 +10656,7 @@
  
  .sidebar {
      width: 6.5rem;
-     min-height: 100vh
+     min-height: 100%
  }
  
  .sidebar .nav-item {

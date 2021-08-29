@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -9,23 +14,28 @@ html,
 body {
     width: 100%;
     height: 100%;
-    margin: 0px;
+    margin: 0;
     padding: 0px;
-    overflow-x: hidden;
+    display: grid;
+    flex-grow: 1;
+    flex-direction: column;
+    min-height: 100%;
+    line-height: 1.6;
+    grid: auto / 1em 1f 1em;
+    /*  overflow-x: hidden;
+    overflow-y: hidden; */
 }
 
 
 /* Footer */
 
 footer {
-    text-align: center;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    /* Height of the footer */
-    background: #6cf;
+    margin-top: auto;
+    padding: 3em;
+    background: #333;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
