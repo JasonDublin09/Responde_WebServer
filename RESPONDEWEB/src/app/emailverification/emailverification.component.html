@@ -27,7 +27,7 @@
 
 <div>
     <div id="log-in">
-        <form formGroup="verify" class="login-form" (ngSubmit)="onSubmit()">
+        <form  class="login-form" [formGroup]="verify"(ngSubmit)="onSubmit()">
             <h1 class="login-heading">Identity Verification</h1>
             <div class="field-container -username">
 

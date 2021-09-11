@@ -54,8 +54,7 @@ import { ViewreportsComponent } from './viewreports/viewreports.component';
     MatSortModule
   ],
   declarations: [
-    EmailverificationComponent,
-    ViewreportsComponent
+    
   ]
 })
 export class MaterialModule {}
@@ -76,6 +75,7 @@ export class MaterialModule {}
     ChangePasswordVerificationComponent,
     ResetPasswordComponent,
     FooterComponent,
+    EmailverificationComponent
   ],
   imports: [
     BrowserModule,

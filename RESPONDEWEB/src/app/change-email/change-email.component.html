@@ -27,7 +27,7 @@
 
 <div>
     <div id="log-in">
-        <form class="login-form">
+        <form class="login-form" [formGroup]="changeemail" (ngSubmit)="onSubmit()">
             <h1 class="login-heading">Enter New Email</h1>
             <!-- <p class="login-copy">A subtitle for a simple responsive login box</p> -->
             <div class="field-container -username">
