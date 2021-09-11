@@ -27,7 +27,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 import { AdminLoginGuard } from './route-guard/admin-login.guard';
-
+import { LoginguardGuard } from './route/loginguard.guard';
+import { RouteGuard } from './route/route.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 /* Table */
@@ -38,6 +39,27 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FooterComponent } from './footer/footer.component';
+import { AuthService } from './auth.service';
+import { EmailverificationComponent } from './emailverification/emailverification.component';
+import { ViewreportsComponent } from './viewreports/viewreports.component';
+
+
+
+@NgModule({
+  exports: [
+    CdkTableModule,
+
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+  ],
+  declarations: [
+    EmailverificationComponent,
+    ViewreportsComponent
+  ]
+})
+export class MaterialModule {}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,12 +80,13 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    
 
     MatTableModule,
     MatSortModule,
@@ -73,21 +96,24 @@ import { FooterComponent } from './footer/footer.component';
     
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      {path:'',component:AdminLoginComponent,canActivate:[AdminLoginGuard]},
-      {path:'dashboard', component:DashboardComponent,canActivate:[AdminGuardGuard]},
-      {path:'report-history', component:ReportHistoryComponent,canActivate:[AdminGuardGuard]},
-      {path:'incoming-report', component:IncomingReportComponent,canActivate:[AdminGuardGuard]},
-      {path:'profile', component:ProfilePageComponent,canActivate:[AdminGuardGuard]},
-      {path:'change-email', component:ChangeEmailComponent,canActivate:[AdminGuardGuard]},
-      {path:'change-password', component:ChangePasswordComponent,canActivate:[AdminGuardGuard]},
-      {path:'change-email-verification', component:ChangeEmailVerificationComponent,canActivate:[AdminGuardGuard]},
-      {path:'change-password-verification', component:ChangePasswordVerificationComponent,canActivate:[AdminGuardGuard]},
-      {path:'reset-password', component:ResetPasswordComponent,canActivate:[AdminGuardGuard]},
+      {path:'',redirectTo: 'login', pathMatch:'full'},
+      {path:'login',component:AdminLoginComponent},
+      {path:'dashboard', component:DashboardComponent},
+      {path:'reporthistory', component:ReportHistoryComponent, canActivate:[RouteGuard]},
+      {path:'incomingreport', component:IncomingReportComponent},
+      {path:'profile', component:ProfilePageComponent, canActivate:[RouteGuard]},
+      {path:'changeemail', component:ChangeEmailComponent},
+      {path:'changepassword', component:ChangePasswordComponent},
+      {path:'emailchanges', component:ChangeEmailVerificationComponent},
+      {path:'passwordchange', component:ChangePasswordVerificationComponent},
+      {path:'reset-password', component:ResetPasswordComponent},
+      {path:'emailverification', component:EmailverificationComponent},
+      {path:'viewreport',component:ViewreportsComponent}
       
     ])
     
   ],
-  providers: [AngularFireAuthGuard],
+  providers: [AngularFireAuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

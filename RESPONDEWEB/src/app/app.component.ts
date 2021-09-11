@@ -10,7 +10,6 @@ export class AppComponent implements OnInit{
   title = 'RESPONDEWEB';
 
   constructor(
-    private afauth:AuthService
   ){}
   ngOnInit() {
     //this.afauth.isLoggedin()

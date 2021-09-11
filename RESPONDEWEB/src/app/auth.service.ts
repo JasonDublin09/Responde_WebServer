@@ -6,7 +6,9 @@ import { AngularFireAuth, PERSISTENCE } from '@angular/fire/auth';
 import 'firebase/auth'
 import {first,switchMap, take} from 'rxjs/operators';
 import { UserModel } from './model/user-model'; 
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { } from 'firebase/auth'
+import { FormGroup } from '@angular/forms';
 
 
 
@@ -16,8 +18,10 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
   currentuser:any;
-  admindata:any;
   user:any
+  userloggedin: boolean;
+  admindata:any
+  
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -25,20 +29,41 @@ export class AuthService {
     private ngZone: NgZone,
     private afs: AngularFirestore
   ) {
+    this.userloggedin=false;
+
+    this.afAuth.onAuthStateChanged((user) => {
+      if (user){
+        this.userloggedin =true;
+      } else{
+        this.userloggedin = false;
+      }
+    })
    }
 
   
-  login(email:string, password:string)
-  { this.afAuth.setPersistence('session').then(()=>this.afAuth.signInWithEmailAndPassword(email,password).then(data=>{console.log(data),this.router.navigateByUrl('dashboard')})
+  login(email:string, password:string):Promise<any>{
+  /*{  this.afAuth.setPersistence('session').then(()=>this.afAuth.signInWithEmailAndPassword(email,password).then(data=>{console.log(data),this.admindata=data,this.router.navigateByUrl('dashboard')})
   .catch(err => {console.log("Something went wrong", err.message)})
   )
-  this.autologin()
-  console.log(this.currentuser)
+  console.log(this.currentuser)*/
+
+  return this.afAuth.signInWithEmailAndPassword(email,password).then((data)=>{
+    console.log('Login User Success');
+    this.admindata={email:email,password:password}
+    console.log(this.admindata)
+    this.router.navigate(['/dashboard']);
+  })
+  .catch(error =>{
+    console.log("login error")
+  })
 };
 
-  logout() {
-    this.afAuth.signOut()
-      this.router.navigateByUrl('');
+  logout():Promise<void> {
+    return this.afAuth.signOut().then(()=>{
+      this.admindata=null
+      console.log(this.admindata)
+      this.router.navigate(['login'])
+    })
     };
   
   private oAuthLogin(provider:any){
@@ -63,6 +88,17 @@ export class AuthService {
       console.log(ErrorCode)})
   }
 
- 
-}
+  updatePassword ( email:string, password:string, updatepass:string ) {
+    this.afAuth.signInWithEmailAndPassword(email,password).then(function (user)
+    {user.user?.updatePassword(updatepass)
+    
+      
+    })
+  }
+
+  getUser():Promise<any>{
+    return this.afAuth.authState.pipe(first()).toPromise();
+  }
+    
+  }
 

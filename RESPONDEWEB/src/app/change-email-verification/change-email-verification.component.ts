@@ -21,13 +21,7 @@ export class ChangeEmailVerificationComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(){
-    if (this.adminLogin.valid){
-      console.log(this.adminLogin.value);
-      this.authService.login(
-        this.adminLogin.value.email,
-        this.adminLogin.value.password
-      )
-    }
+    
   
   }
 }

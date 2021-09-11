@@ -34,15 +34,32 @@ export class AdminLoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //this.afauth.authState.pipe(map(user=>{console.log(user)}))
   }
 onSubmit(){
   if (this.adminLogin.valid){
     console.log(this.adminLogin.value);
-    this.authService.login(
+     this.authService.login(
       this.adminLogin.value.email,
       this.adminLogin.value.password
-    )}
+    )
+    this.authService.admindata=this.adminLogin.value
+    console.log(this.authService.admindata)
+    return this.authService.admindata
+  }
+   /*this.afauth.authState.subscribe(res=>{
+      if (res && res.uid){
+        console.log('user login');
+        this.admindata=this.adminLogin.value
+        console.log(this.admindata)
+        
 
+      } else{
+        console.log('user not logged in')
+      }
+      })*/ 
+    //this.afauth.currentUser.then((data)=>console.log(data))
+    
   }
 
 reset(){

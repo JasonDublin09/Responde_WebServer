@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="change-password.component.css">
+<link rel="stylesheet" href="emailverification.component.css">
 <link rel="icon" href="Favicon.png">
 
 <!-- Bootstrap CSS -->
@@ -27,19 +27,19 @@
 
 <div>
     <div id="log-in">
-        <form class="login-form"[formGroup]="updatepassword" (ngSubmit)="onSubmit()">
-            <h1 class="login-heading">Enter New Password</h1>
-            <p class="login-copy">Password</p>
-            <div class="field-container -password">
-                <input type="password" placeholder="Password" formControlName="password1" required/>
+        <form formGroup="verify" class="login-form" (ngSubmit)="onSubmit()">
+            <h1 class="login-heading">Identity Verification</h1>
+            <div class="field-container -username">
+
+                <input type="email" placeholder="Email" formControlName="email" required/>
             </div>
-            <p class="login-copy">Confirm Password</p>
             <div class="field-container -password">
-                <input type="password" placeholder="Password" formControlName="password2" required/>
+
+                <input type="password" placeholder="Password" formControlName="password" required/>
             </div>
-            <!-- update -->
-            <button style="color: #fff;" type="submit" class="auth-btn log-in-button bg-primary">
-            Update
+            <!-- if successful, link to change email page -->
+            <button style="color: #fff;" type="submit" [disabled]="!verify.valid" class="auth-btn log-in-button bg-primary">
+            Log in
         </button>
 
 

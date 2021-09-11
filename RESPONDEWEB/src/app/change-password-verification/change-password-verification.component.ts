@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-change-password-verification',
@@ -10,24 +12,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ChangePasswordVerificationComponent implements OnInit {
 
-  adminLogin: FormGroup = new FormGroup({
+  verification: FormGroup = new FormGroup({
     "email": new FormControl,
     "password": new FormControl
   })
   constructor(
-    private authService:AuthService
+    private authService:AuthService,
+    private router:Router,
+    
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
   onSubmit(){
-    if (this.adminLogin.valid){
-      console.log(this.adminLogin.value);
-      this.authService.login(
-        this.adminLogin.value.email,
-        this.adminLogin.value.password
-      )
+    console.log(this.authService.admindata)
+    console.log(this.verification.value)
+    if (this.authService.admindata == this.verification.value){
+      
     }
-  
-  }
+    this.router.navigateByUrl('changepassword')
+    
+      }
+      
 }
+

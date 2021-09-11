@@ -15,12 +15,31 @@ export class AdminLoginGuard implements CanActivate {
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean | UrlTree | UrlTree> {
-    const user = await this.afAuth.authState;
+  /*  const user = await this.afAuth.authState;
     const isAuthenticated = user ? true:false;
     if (!isAuthenticated){
       this.router.navigate(['dashboard'])
     }
     return isAuthenticated
-  }
+  }*/
+  /*return this.authService.admindata.pipe(take(1),
+  map(user=>{
+    const isAuth=!!user;
+    if(!isAuth)
+    {
+      return true;
+    }
+    return this.router.createUrlTree(['dashboard'])
+  }))
+}*/
+const user = this.afAuth.authState
   
+  const loggedIn= !!user;
+  console.log(loggedIn)
+  if (!loggedIn){
+    this.router.navigate(['dashboard'])
+
+  }
+  return loggedIn
+  }
 }

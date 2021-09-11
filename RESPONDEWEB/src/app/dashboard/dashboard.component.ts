@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
+    console.log('ewan')
     this.afauth.logout()
+
   }
 }
