@@ -12,57 +12,80 @@
     height: 100%;
 }
 
-.profile-page {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    padding-left: 15px;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2);
-    margin-left: 10px;
+
+/* button container */
+
+:host ::ng-deep .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 56px;
+    padding: 0 8px;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    margin-top: 20px;
 }
 
-.h4 {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 24px;
-    outline: none;
-}
 
-.edit-profile-button {
+/* Button Style */
+
+.pure-material-button-contained-decline {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
     border: none;
     border-radius: 12px;
     padding: 0 16px;
-    min-width: 64px;
-    height: 36px;
+    min-width: 125px;
+    height: 40px;
     vertical-align: middle;
     text-align: center;
     text-overflow: ellipsis;
     color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
-    background-color: #4e73df;
+    /* background-color: #36b9cc; */
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 36px;
     overflow: hidden;
     outline: none;
     cursor: pointer;
     transition: box-shadow 0.2s;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
+    margin-right: 0;
 }
 
-.edit-profile-button::-moz-focus-inner {
+.pure-material-button-contained-respond {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 12px;
+    padding: 0 16px;
+    min-width: 125px;
+    height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    text-overflow: ellipsis;
+    color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+    /* background-color: #36b9cc; */
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 36px;
+    overflow: hidden;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.pure-material-button-contained::-moz-focus-inner {
     border: none;
 }
 
 
 /* Overlay */
 
-.edit-profile-button::before {
+.pure-material-button-contained::before {
     content: "";
     position: absolute;
     top: 0;
@@ -77,13 +100,13 @@
 
 /* Ripple */
 
-.edit-profile-button::after {
+.pure-material-button-contained::after {
     content: "";
     position: absolute;
     left: 50%;
     top: 50%;
     border-radius: 50%;
-    padding: 50%;
+    padding: 10px;
     width: 32px;
     /* Safari */
     height: 32px;
@@ -97,31 +120,31 @@
 
 /* Hover, Focus */
 
-.edit-profile-button:hover,
-.edit-profile-button:focus {
+.pure-material-button-contained:hover,
+.pure-material-button-contained:focus {
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.edit-profile-button:hover::before {
+.pure-material-button-contained:hover::before {
     opacity: 0.08;
 }
 
-.edit-profile-button:focus::before {
+.pure-material-button-contained:focus::before {
     opacity: 0.24;
 }
 
-.edit-profile-button:hover:focus::before {
+.pure-material-button-contained:hover:focus::before {
     opacity: 0.3;
 }
 
 
 /* Active */
 
-.edit-profile-button:active {
+.pure-material-button-contained:active {
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.edit-profile-button:active::after {
+.pure-material-button-contained:active::after {
     opacity: 0.32;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0s;
@@ -130,17 +153,32 @@
 
 /* Disabled */
 
-.edit-profile-button:disabled {
+.pure-material-button-contained:disabled {
     color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
     background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
     box-shadow: none;
     cursor: initial;
 }
 
-.edit-profile-button:disabled::before {
+.pure-material-button-contained:disabled::before {
     opacity: 0;
 }
 
-.edit-profile-button:disabled::after {
+.pure-material-button-contained:disabled::after {
     opacity: 0;
+}
+
+
+/* modal */
+
+:host ::ng-deep .modal-title {
+    font-size: 1.5rem;
+    padding-top: 10px;
+}
+
+.modal-body li {
+    list-style-type: none;
+    font-size: 1rem;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }

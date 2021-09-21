@@ -9,12 +9,13 @@ import { UserModel } from './model/user-model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { } from 'firebase/auth'
 import { FormGroup } from '@angular/forms';
-
+import { AngularFireDatabase } from '@angular/fire/database';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   currentuser:any;
@@ -27,7 +28,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private ngZone: NgZone,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private db: AngularFireDatabase,
   ) {
     this.userloggedin=false;
 
@@ -100,5 +102,15 @@ export class AuthService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
     
+  
+  get(uid: any){
+    // access db child
+    return this.db.object('/IncomingReport/' + uid);
   }
+
+  getArchive(uid: any){
+    // access db child
+    return this.db.object('/ReportHistory/' + uid);
+  }
+}
 

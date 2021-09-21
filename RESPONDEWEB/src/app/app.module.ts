@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
@@ -19,7 +20,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportHistoryComponent } from './report-history/report-history.component';
 import { IncomingReportComponent } from './incoming-report/incoming-report.component';
 import { TopbarComponent } from './topbar/topbar.component';
-/* import { MatTableModule } from '@angular/material/table'; */
+import { FooterComponent } from './footer/footer.component';
+import { FullIncomingReportComponent } from './full-incoming-report/full-incoming-report.component';
+import { FullArchivedReportComponent } from './full-archived-report/full-archived-report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
@@ -38,7 +41,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { FooterComponent } from './footer/footer.component';
 import { AuthService } from './auth.service';
 import { EmailverificationComponent } from './emailverification/emailverification.component';
 import { ViewreportsComponent } from './viewreports/viewreports.component';
@@ -75,7 +77,9 @@ export class MaterialModule {}
     ChangePasswordVerificationComponent,
     ResetPasswordComponent,
     FooterComponent,
-    EmailverificationComponent
+    FullIncomingReportComponent,
+    FullArchivedReportComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,7 @@ export class MaterialModule {}
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    
+    AngularFireDatabaseModule,
 
     MatTableModule,
     MatSortModule,
@@ -109,6 +113,7 @@ export class MaterialModule {}
       {path:'reset-password', component:ResetPasswordComponent},
       {path:'emailverification', component:EmailverificationComponent},
       {path:'viewreport',component:ViewreportsComponent}
+      /* full report path in auth service */
       
     ])
     

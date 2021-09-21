@@ -5,27 +5,23 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataSource } from '@angular/cdk/table';
+import { AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { Routes, RouterModule, Router} from '@angular/router';
 
-/* export interface ReportHistory {
-  id: any;
-  report_id: string;
-  reporter_name: string;
-  date: string;
-  status: string;
+
+export interface ReportHistory {
+  uid?: string;
+  address?: string;
+  contact?: string;
+  date?: string;
+  lat?: string;
+  long?: string;
+  name?: string;
+  option?: string;
 };
-
-const REPORT_DATA: ReportHistory[] = [
-  {id: "1", report_id: '44d4cde53e47', reporter_name: 'Levi', date: 'Mar 12 2012 15:00:00', status: 'Responded',},
-  {id: "2", report_id: 'de6d34eb3573', reporter_name: 'Jason', date: 'Mar 13 2012 12:00:00', status: 'Responded'},
-  {id: '3', report_id: '074731d8f757', reporter_name: 'Nino', date: 'Mar 14 2012 11:00:00', status: 'Responded'},
-  {id: '4', report_id: '41eb63b3a0ab', reporter_name: 'Deric', date: 'Mar 15 2012 09:00:00', status: 'Responded'},
-  {id: '5', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-  {id: '6', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-  {id: '7', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-  {id: '8', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-  {id: '9', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-  {id: '10', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'},
-]; */
 
 
 @Component({
@@ -34,63 +30,53 @@ const REPORT_DATA: ReportHistory[] = [
   styleUrls: ['./report-history.component.css']
 })
 
-export class ReportHistoryComponent{
-  displayedColumns: string[] = ['id', 'report_id', 'reporter_name', 'date', 'status', 'actions'];
-  dataSource : any;//ELEMENT_DATA;
-  //dataSource = new MatTableDataSource(REPORT_DATA);
+export class ReportHistoryComponent implements OnInit {
+  displayedColumns: string[] = ['uid', 'name', 'address', 'contact', 'date', 'actions'];
+  dataSource : any;
 
-  /* from https://material.angular.io/components/table/overview#pagination*/
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  
-
-
-  constructor() { 
+  reports?: Observable<any[]>;
+  constructor(private db: AngularFireDatabase, private router: Router) { 
+    // db collection name
+    this.reports = db.list('ReportHistory').valueChanges();  
+    
   }
 
-  ngOnInit(): void {
-    console.log(this.dataSource)
+  destroy$:Subject<void> = new Subject(); 
+  ngOnInit() {
+
+    this.dataSource = new MatTableDataSource([]);
+    this.db.list('ReportHistory').valueChanges().pipe(
+        takeUntil(this.destroy$)
+    ).subscribe(data => this.dataSource.data = data);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
   logData(row: any){
     console.log(row);
   }
 
+  // table filtering
   applyFilter(event: Event): string {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     return (event.target as HTMLInputElement).value;
   }
 
-  ngAfterViewInit(): void {
-    console.log(this.dataSource);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  /* view route */
+  onSelect(report){
+    this.router.navigate(['report', report.uid]);
   }
 
-
 }
-
-
-/*export interface ReportHistory {
-  id: any;
-  report_id: string;
-  reporter_name: string;
-  date: string;
-  status: string;
-}
-
-
-const ELEMENT_DATA: ReportHistory[] = [
-  {id: "1", report_id: '44d4cde53e47', reporter_name: 'Levi', date: 'Mar 12 2012 15:00:00', status: 'Responded'},
-  {id: "2", report_id: 'de6d34eb3573', reporter_name: 'Jason', date: 'Mar 13 2012 12:00:00', status: 'Responded'},
-  {id: '3', report_id: '074731d8f757', reporter_name: 'Nino', date: 'Mar 14 2012 11:00:00', status: 'Responded'},
-  {id: '4', report_id: '41eb63b3a0ab', reporter_name: 'Deric', date: 'Mar 15 2012 09:00:00', status: 'Responded'},
-  {id: '5', report_id: '1d899c04de28', reporter_name: 'reporter 5', date: 'Mar 15 2012 19:00:00', status: 'Responded'}
-];*/
-
-
-
-
-
