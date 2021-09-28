@@ -92,7 +92,7 @@
                                 <div class="card-body ">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2 overflow-auto">
-                                            <p></p>
+                                            <input #notes id="notes">
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                         </div>
                         <!-- buttons -->
                         <div class="col-6 col-md-4 d-flex justify-content-center">
-                            <button class="pure-material-button-contained-decline btn btn-info text-center" type="button">Add Notes</button>
+                            <button class="pure-material-button-contained-decline btn btn-info text-center" type="button" (click)="editNote($event)">Add Notes</button>
                         </div>
 
 

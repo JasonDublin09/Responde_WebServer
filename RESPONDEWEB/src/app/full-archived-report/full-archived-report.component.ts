@@ -17,7 +17,8 @@ export class FullArchivedReportComponent implements OnInit {
   public report_contact: any;
   public report_option: any;
   public report_date: any;
-
+  
+  notes: any;
   report: any;
 
   reports?: Observable<any[]>;
@@ -45,6 +46,14 @@ export class FullArchivedReportComponent implements OnInit {
     });
   }
 
-  
+
+  editNote(event: Event): string{
+    const editedNote = (event.target as HTMLInputElement).value;
+
+    /* if (this.report_uid) this.authService.getArchive(this.report_uid)
+      .update(this.report,{notes: this.notes}); */
+    console.log(editedNote);
+    return (event.target as HTMLInputElement).value;
+  }
 
 }
