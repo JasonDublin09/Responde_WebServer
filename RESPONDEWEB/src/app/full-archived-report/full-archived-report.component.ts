@@ -23,7 +23,12 @@ export class FullArchivedReportComponent implements OnInit {
   reports?: Observable<any[]>;
   constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService) {
 
-    this.reports = db.list('ReportHistory').valueChanges();
+    
+  }
+
+  ngOnInit(): void {
+
+    this.reports = this.db.list('ReportHistory').valueChanges();
 
     // get uid
     let id = (this.route.snapshot.paramMap.get('uid'));
@@ -38,9 +43,6 @@ export class FullArchivedReportComponent implements OnInit {
       this.report_date = this.report.date;
       console.log(r);
     });
-  }
-
-  ngOnInit(): void {
   }
 
   

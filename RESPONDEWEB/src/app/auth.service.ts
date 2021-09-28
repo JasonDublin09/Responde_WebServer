@@ -112,5 +112,9 @@ export class AuthService {
     // access db child
     return this.db.object('/ReportHistory/' + uid);
   }
+
+  getreports(){
+    return this.db.list('/IncomingReport/', ref => ref.orderByChild("option").equalTo('home'));
+  }
 }
 

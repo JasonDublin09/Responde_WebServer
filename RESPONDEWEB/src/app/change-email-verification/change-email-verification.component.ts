@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ChangeEmailVerificationComponent implements OnInit {
 
+
   adminLogin: FormGroup = new FormGroup({
     "email": new FormControl,
     "password": new FormControl
@@ -21,6 +22,7 @@ export class ChangeEmailVerificationComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(){
+
     
   
   }

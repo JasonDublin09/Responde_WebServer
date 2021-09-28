@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 import { Observable, Subject } from 'rxjs';
 import * as firebase from 'firebase';
 import { AuthService } from '../auth.service';
+import { Loader } from '@googlemaps/js-api-loader';
 
 @Component({
   selector: 'app-full-incoming-report',
@@ -11,6 +12,10 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./full-incoming-report.component.css']
 })
 export class FullIncomingReportComponent implements OnInit {
+
+  map:any;
+  lat:any;
+  lng:any;
 
   public report_uid: any;
   public report_name: any;
@@ -22,9 +27,14 @@ export class FullIncomingReportComponent implements OnInit {
   report: any;
 
   reports?: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService) {
-    
-    this.reports = db.list('IncomingReport').valueChanges();
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService) { 
+   
+
+  }
+
+  ngOnInit() {
+
+    this.reports = this.db.list('IncomingReport').valueChanges();
 
     // get uid
     let id = (this.route.snapshot.paramMap.get('uid'));
@@ -37,12 +47,28 @@ export class FullIncomingReportComponent implements OnInit {
       this.report_contact = this.report.contact;
       this.report_option = this.report.option;
       this.report_date = this.report.date;
-      console.log(r);
+      this.lng=this.report.long
+      this.lat= this.report.lat
+      console.log(this.lat);
+
+      const mapproperties={
+        center: {lat:this.report.lat, lng:this.report.long},
+        zoom:18,
+      };
+      let loader = new Loader({apiKey:'AIzaSyCJkK42-ShnYgB3jlwtxWwZeP0B5b3suGY'})
+      loader.load().then(()=>{
+        this.map = new google.maps.Map(document.getElementById('map')!,mapproperties);
+        var marker = new google.maps.Marker({
+          position:{lat:this.report.lat,lng:this.report.long},
+          map:this.map,
+          label:"A"
+        })
+      })
+      
     });
+      
 
-  }
-
-  ngOnInit(): void {
+    
 
   
   }

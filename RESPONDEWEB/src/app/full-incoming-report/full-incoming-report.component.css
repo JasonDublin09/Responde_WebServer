@@ -182,3 +182,8 @@
     padding-bottom: 10px;
     padding-top: 10px;
 }
+
+.full {
+    width: 175vh;
+    height: 55vh;
+}

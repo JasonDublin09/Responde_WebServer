@@ -49,6 +49,8 @@ export class IncomingReportComponent implements OnInit {
     this.db.list('IncomingReport').valueChanges().pipe(
       takeUntil(this.destroy$)
   ).subscribe(data => this.dataSource.data = data);
+
+  //console.log(this.db.list('IncomingReport', ref=> ref.orderByChild('option').equalTo('home')).valueChanges().pipe().subscribe)
   }
   
   ngAfterViewInit(): void {

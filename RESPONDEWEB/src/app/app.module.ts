@@ -33,6 +33,10 @@ import { AdminLoginGuard } from './route-guard/admin-login.guard';
 import { LoginguardGuard } from './route/loginguard.guard';
 import { RouteGuard } from './route/route.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AuthService } from './auth.service';
+import { EmailverificationComponent } from './emailverification/emailverification.component';
+import { ViewreportsComponent } from './viewreports/viewreports.component';
+
 
 /* Table */
 import {CdkTableModule} from '@angular/cdk/table';
@@ -41,9 +45,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { AuthService } from './auth.service';
-import { EmailverificationComponent } from './emailverification/emailverification.component';
-import { ViewreportsComponent } from './viewreports/viewreports.component';
+
 
 
 
@@ -79,6 +81,7 @@ export class MaterialModule {}
     FooterComponent,
     FullIncomingReportComponent,
     FullArchivedReportComponent,
+    EmailverificationComponent,
   
   ],
   imports: [

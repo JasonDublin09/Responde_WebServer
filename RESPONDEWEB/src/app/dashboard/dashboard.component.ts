@@ -17,10 +17,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.db.list('IncomingReport').valueChanges().pipe()
-    .subscribe(data => {this.incomingReportLength=(data.length); console.log(this.incomingReportLength); this.dataSource.data = data;});
+    .subscribe(data => {this.incomingReportLength=(data.length); console.log(this.incomingReportLength); /*this.dataSource.data = data;*/});
 
     this.db.list('ReportHistory').valueChanges().pipe()
-    .subscribe(data => {this.reportHistoryLength=(data.length); console.log(this.reportHistoryLength); this.dataSource.data = data;});
+    .subscribe(data => {this.reportHistoryLength=(data.length); console.log(this.reportHistoryLength); /*this.dataSource.data = data;*/});
   }
 
   logout(){
