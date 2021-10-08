@@ -10,17 +10,20 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil} from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Routes, RouterModule, Router} from '@angular/router';
+import { AuthService } from '../auth.service'
 
 
 export interface ReportHistory {
-  uid?: string;
-  address?: string;
+  key?: string;
+  home?: string;
   contact?: string;
   date?: string;
   lat?: string;
-  long?: string;
+  lng?: string;
   name?: string;
   option?: string;
+  email?: string;
+  status?: string;
 };
 
 
@@ -31,36 +34,46 @@ export interface ReportHistory {
 })
 
 export class ReportHistoryComponent implements OnInit {
-  displayedColumns: string[] = ['uid', 'name', 'address', 'contact', 'date', 'actions'];
+  displayedColumns: string[] = ['key','name','home','contact','date','actions'];
   dataSource : any;
-
+  ReportHistory?:  ReportHistory[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  reports?: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private router: Router) { 
-    // db collection name
-    this.reports = db.list('ReportHistory').valueChanges();  
+  constructor(private db: AngularFireDatabase, private router: Router, private authService: AuthService) { 
     
   }
 
-  destroy$:Subject<void> = new Subject(); 
+  
   ngOnInit() {
 
     this.dataSource = new MatTableDataSource([]);
-    this.db.list('ReportHistory').valueChanges().pipe(
-        takeUntil(this.destroy$)
-    ).subscribe(data => this.dataSource.data = data);
-  }
+    
+    /* let s = this.authService.getReportList();
+    s.snapshotChanges().subscribe(data => {
+      this.dataSource.data = data
+      this.ReportHistory = [];
+      data.forEach(item => {
+        let a = item.payload.key;
+        this.ReportHistory!.push(a as ReportHistory);
+        console.log(item.payload.val());
+      })
+    }) */
 
-  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-  
-  ngOnDestroy() {
-    this.destroy$.next();
+
+    this.db.list('IncomingReport/', ref => ref.orderByChild('status').equalTo('Responded'))
+    .snapshotChanges().subscribe(data => {
+      this.dataSource.data = data
+      this.ReportHistory = [];
+      data.forEach(item => {
+        let a = item.payload.key;
+        this.ReportHistory!.push(a as ReportHistory);
+        console.log(item.payload.val());
+      })
+    })
   }
 
   logData(row: any){
@@ -76,7 +89,7 @@ export class ReportHistoryComponent implements OnInit {
 
   /* view route */
   onSelect(report){
-    this.router.navigate(['report', report.uid]);
+    this.router.navigate(['report', report.key]);
   }
 
 }

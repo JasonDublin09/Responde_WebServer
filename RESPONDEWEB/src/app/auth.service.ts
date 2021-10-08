@@ -9,7 +9,7 @@ import { UserModel } from './model/user-model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { } from 'firebase/auth'
 import { FormGroup } from '@angular/forms';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
 
 @Injectable({
@@ -22,7 +22,8 @@ export class AuthService {
   user:any
   userloggedin: boolean;
   admindata:any
-  
+  incomingReportRef?: AngularFireList<any>;
+  historyReportRef?: AngularFireList<any>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -102,7 +103,14 @@ export class AuthService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
     
-  
+  getIncomingReportList(){
+    this.incomingReportRef = this.db.list('/IncomingReport/');
+    return this.incomingReportRef;
+  }
+  getReportList(){
+    this.historyReportRef = this.db.list('/ReportHistory/');
+    return this.historyReportRef;
+  }
   get(uid: any){
     // access db child
     return this.db.object('/IncomingReport/' + uid);
@@ -113,9 +121,14 @@ export class AuthService {
     return this.db.object('/ReportHistory/' + uid);
   }
 
+  updateNote(uid: string, value:any): void{
+    this.db.list('/IncomingReport/').update(uid,value)
+  }
+
   getreports(){
     return this.db.list('/IncomingReport/', ref => ref.orderByChild("option").equalTo('home'));
   }
+
 }
 
 

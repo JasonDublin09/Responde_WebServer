@@ -1,172 +1,152 @@
-<body>
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <!-- sidenav -->
-        <app-sidenav></app-sidenav>
+    <!-- sidenav -->
+    <app-sidenav></app-sidenav>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <!-- Topbar -->
-                <app-topbar></app-topbar>
+            <!-- Topbar -->
+            <app-topbar></app-topbar>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex  justify-content-flex-start mb-3">
-                        <button value="Go back!" onclick="history.back()" style="border-style: none; background-color: #f8f9fa">
+                <!-- Page Heading -->
+                <div class="d-sm-flex  justify-content-flex-start mb-3">
+                    <button value="Go back!" onclick="history.back()" style="border-style: none; background-color: #f8f9fa">
                         <i class='fas fa-arrow-alt-circle-left fa-2x'></i>
                     </button>
 
-                        <h1 class="h3 mb-0 text-gray-800 " style="padding-left:10px;">Report ID: {{report_uid}}</h1>
-                    </div>
+                    <h1 class="h3 mb-0 text-gray-800 " style="padding-left:10px;">Report ID: {{report_uid}}</h1>
+                </div>
 
-                    <!-- Content Row -->
+                <!-- Content Row -->
 
 
-                    <!-- class="mat-elevation-z8" -->
+                <!-- class="mat-elevation-z8" -->
 
-                    <div class="row">
-                        <!-- <div class="col col-xl-3 col-md-6 mb-4"> -->
-                        <div class="col-6 col-md-4">
-                            <a class="card">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-md text-gray  mb-1 ">Reporter Name: {{report_name}}</div>
-                                                <div class="text-md text-gray  mb-1">Address: {{report_address}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-6 col-md-4">
-                            <a class="card">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-md text-gray  mb-1 ">Reporter Contact: {{report_contact}}</div>
-                                                <div class="text-md text-gray  mb-1">Date: {{report_date}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-6 col-md-4">
-                            <a class="card">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-md text-gray  mb-1">Report Option: {{report_option}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <!-- Map -->
-                        <p>google map</p>
-                    </div>
-
-                    <h3 class="h3 mb-0">Report Notes:</h3>
-                    <div class="row" style="margin-top: 1%">
-
-                        <div class="col-12 col-sm-6 col-md-8">
-                            <div class="card border-left-info shadow h-100 py-2 text-notes">
-                                <div class="card-body ">
+                <div class="row">
+                    <!-- <div class="col col-xl-3 col-md-6 mb-4"> -->
+                    <div class="col-6 col-md-4">
+                        <a class="card">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2 overflow-auto">
-                                            <input #notes id="notes">
+                                        <div class="col mr-2">
+                                            <div class="text-md text-gray  mb-1 "><strong>Reporter Name:</strong> {{report_name}}</div>
+                                            <div class="text-md text-gray  mb-1 "><strong>Reporter Contact:</strong> {{report_contact}}</div>
+                                            <div class="text-md text-gray  mb-1"><strong>Email:</strong> {{report_email}}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- buttons -->
-                        <div class="col-6 col-md-4 d-flex justify-content-center">
-                            <button class="pure-material-button-contained-decline btn btn-info text-center" type="button" (click)="editNote($event)">Add Notes</button>
-                        </div>
+                        </a>
+                    </div>
 
+                    <div class="col-6 col-md-4">
+                        <a class="card">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-md text-gray  mb-1"><strong>Address:</strong> {{report_address}}</div>
+                                            <div class="text-md text-gray  mb-1"><strong>Date:</strong> {{report_date}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <a class="card">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-md text-gray  mb-1"><strong>Status:</strong> {{report_status}}</div>
+                                            <div class="text-md text-gray  mb-1"><strong>Report Option:</strong> {{report_option}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <!-- Map -->
+                    <p>google map</p>
+                </div>
+
+                <!-- <h3 class="h3 mb-0" style="margin-top: 3%">Report Notes:</h3> -->
+                <div class="row" style="margin-top: 1%">
+
+                    <div class="col-12 col-sm-6 col-md-8" *ngFor="let item of detailItems">
+                        <div class=" border-left-primary card">
+                            <div class="card text-left ">
+                                <div class="card-header text-secondary ">Report Notes
+                                    <small class="pull-right text-primary " style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=true">Edit</small>
+                                    <small class="pull-right text-danger " style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=false">Cancel</small>
+                                    <small class="pull-right text-success " style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=false; editNote()">Save</small>
+
+                                </div>
+                                <div class="card-body ">
+                                    <span style="white-space: pre-line">{{report_notes}}</span>
+                                    <textarea id="tArea" *ngIf="item.canEditCode==true" [(ngModel)]="item.notes" type="text " class="form-control"></textarea>
+                                    <!-- <script>
+                                        function myFunction() {
+                                            document.getElementById("tArea").value = item.notes;
+                                        }
+                                    </script> -->
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <app-footer></app-footer>
-                <!-- End of Footer -->
-
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <app-footer></app-footer>
+            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+</div>
+<!-- End of Page Wrapper -->
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded " href="#page-top ">
+    <i class="fas fa-angle-up "></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade " id="logoutModal " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog " role="document ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h5 class="modal-title " id="exampleModalLabel ">Ready to Leave?</h5>
+                <button class="close " type="button " data-dismiss="modal " aria-label="Close ">
+            <span aria-hidden="true ">×</span>
         </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#" data-dismiss="modal">Logout</a>
-                </div>
+            </div>
+            <div class="modal-body ">Select "Logout " below if you are ready to end your current session.</div>
+            <div class="modal-footer ">
+                <button class="btn btn-secondary " type="button " data-dismiss="modal ">Cancel</button>
+                <a class="btn btn-primary " href="# " data-dismiss="modal ">Logout</a>
             </div>
         </div>
     </div>
-</body>
-
-<script>
-    function saveEdits() {
-
-        //get the editable element
-        var editElem = document.getElementById("edit");
-
-        //get the edited element content
-        var userVersion = editElem.innerHTML;
-
-        //save the content to local storage
-        localStorage.userEdits = userVersion;
-
-        //write a confirmation to the user
-        document.getElementById("update").innerHTML = "Edits saved!";
-
-    }
-
-    function checkEdits() {
-
-        //find out if the user has previously saved edits
-        if (localStorage.userEdits != null)
-            document.getElementById("edit").innerHTML = localStorage.userEdits;
-    }
-</script>
+</div>

@@ -186,12 +186,11 @@
 
 /* notes */
 
-:host ::ng-deep .text-notes {
-    background-color: white;
-    border-radius: 5px;
-    min-width: 200px;
-    width: 100%;
-    min-height: 100px;
-    height: auto;
-    margin-right: 31em;
+small:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+textarea {
+    height: 300px;
 }

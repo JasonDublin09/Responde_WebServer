@@ -9,18 +9,21 @@ import { takeUntil} from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Routes, RouterModule, Router} from '@angular/router';
 import { FullIncomingReportComponent } from '../full-incoming-report/full-incoming-report.component';
+import { AuthService } from '../auth.service'
 
 
 export interface IncomingReport {
-  uid?: string;
-  address?: string;
+  key?: string;
+  home?: string;
   contact?: string;
   date?: string;
   lat?: string;
-  long?: string;
+  lng?: string;
   name?: string;
   option?: string;
-};
+  email?: string;
+  status?: string;
+}; 
 
 
 @Component({
@@ -30,38 +33,46 @@ export interface IncomingReport {
 })
 
 export class IncomingReportComponent implements OnInit {
-  displayedColumns: string[] = ['uid', 'name', 'address', 'contact', 'date', 'actions'];
+  displayedColumns: string[] = ['key','name','home','contact','date','actions'];
   dataSource : any;
-  key : any;
+  IncomingReport?:  IncomingReport[];
+
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  reports?: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private router: Router) { 
-    // db collection name
-    this.reports = db.list('IncomingReport').valueChanges();
+  constructor(private db: AngularFireDatabase, private router: Router, private authService: AuthService) { 
     
   }
 
-  destroy$:Subject<void> = new Subject(); 
   ngOnInit() {
     this.dataSource = new MatTableDataSource([]);
-    this.db.list('IncomingReport').valueChanges().pipe(
-      takeUntil(this.destroy$)
-  ).subscribe(data => this.dataSource.data = data);
+    
+    /* let s = this.authService.getIncomingReportList();
+    s.snapshotChanges().subscribe(data => {
+      this.dataSource.data = data
+      this.IncomingReport = [];
+      data.forEach(item => {
+        let a = item.payload.key;
+        this.IncomingReport!.push(a as IncomingReport);
+        console.log(item.payload.val());
+      })
+    }) */
 
-  //console.log(this.db.list('IncomingReport', ref=> ref.orderByChild('option').equalTo('home')).valueChanges().pipe().subscribe)
-  }
-  
-  ngAfterViewInit(): void {
+    this.db.list('IncomingReport/', ref => ref.orderByChild('status').equalTo(''))
+    .snapshotChanges().subscribe(data => {
+      this.dataSource.data = data
+      this.IncomingReport = [];
+      data.forEach(item => {
+        let a = item.payload.key;
+        this.IncomingReport!.push(a as IncomingReport);
+        console.log(item.payload.val());
+      })
+    })
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
   
-
-  ngOnDestroy() {
-    this.destroy$.next();
-  }
 
   logData(row: any){
     console.log(row);
@@ -76,7 +87,8 @@ export class IncomingReportComponent implements OnInit {
 
   /* view route */
   onSelect(report){
-    this.router.navigate(['incoming-report', report.uid]);
+    this.router.navigate(['incoming-report', report.key]);
   }
+
 
 }
