@@ -194,3 +194,9 @@ small:hover {
 textarea {
     height: 300px;
 }
+
+.full {
+    width: 100%;
+    height: 55vh;
+    margin: 15px;
+}

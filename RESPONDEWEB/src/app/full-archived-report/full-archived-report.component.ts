@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { Observable, Subject } from 'rxjs';
+import { Loader } from '@googlemaps/js-api-loader';
 
 @Component({
   selector: 'app-full-archived-report',
@@ -56,9 +57,25 @@ export class FullArchivedReportComponent implements OnInit {
       this.lat= this.report.lat
       this.report_notes = this.report.notes[0].notes;
       console.log(r);
-    });
 
-    
+      const mapproperties={
+        center: {lat:this.report.lat, lng:this.report.lng},
+        zoom:18,
+      };
+      let loader = new Loader({apiKey:'AIzaSyCJkK42-ShnYgB3jlwtxWwZeP0B5b3suGY'})
+      loader.load().then(()=>{
+        this.map = new google.maps.Map(document.getElementById('map')!,mapproperties);
+        var marker = new google.maps.Marker({
+          position:{lat:this.report.lat,lng:this.report.lng},
+          map:this.map,
+          label:"A"
+        })
+      })
+
+      
+      
+    });
+ 
   }
 
   editNote(){

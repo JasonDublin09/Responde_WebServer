@@ -56,7 +56,7 @@ export class FullIncomingReportComponent implements OnInit {
       this.lng=this.report.lng
       this.lat= this.report.lat
       console.log(this.lat);
-      console.log(this.report);
+      console.log(this.report.lat);
 
       const mapproperties={
         center: {lat:this.report.lat, lng:this.report.lng},
@@ -66,13 +66,17 @@ export class FullIncomingReportComponent implements OnInit {
       loader.load().then(()=>{
         this.map = new google.maps.Map(document.getElementById('map')!,mapproperties);
         var marker = new google.maps.Marker({
-          position:{lat:this.report.lat,lng:this.report.long},
+          position:{lat:this.report.lat,lng:this.report.lng},
           map:this.map,
           label:"A"
         })
       })
+
+      
       
     });
+
+    
       
   }
 
