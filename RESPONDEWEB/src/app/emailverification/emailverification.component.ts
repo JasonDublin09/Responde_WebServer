@@ -21,14 +21,18 @@ export class EmailverificationComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log(this.authService.admindata)
     
   }
   
   onSubmit(){
-    console.log(this.authService.admindata)
+    if (this.authService.admindata == this.verify.value){
+      
+    }
     console.log(this.verify.value)
+    this.router.navigateByUrl('/changeemail')
     //if (this.authService.admindata == this.verify.value){
-      this.router.navigateByUrl('/changeemail')
+      
     //}
    
     

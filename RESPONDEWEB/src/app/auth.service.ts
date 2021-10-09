@@ -99,6 +99,11 @@ export class AuthService {
     })
   }
 
+  updateEmail (email:string, password:string, uEmail:string){
+    this.afAuth.signInWithEmailAndPassword(email,password).then(function (user)
+    {user.user?.updateEmail(uEmail)})
+  }
+
   getUser():Promise<any>{
     return this.afAuth.authState.pipe(first()).toPromise();
   }

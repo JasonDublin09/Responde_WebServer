@@ -24,6 +24,7 @@ export class ChangePasswordComponent implements OnInit {
 onSubmit(){
   console.log(this.authService.admindata)
   this.authService.updatePassword(this.authService.admindata.email,this.authService.admindata.password,this.updatepassword.value.password1)
+  this.router.navigateByUrl('login')
   
   
 
