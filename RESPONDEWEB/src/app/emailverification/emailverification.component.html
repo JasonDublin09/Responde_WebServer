@@ -27,7 +27,7 @@
 
 <div>
     <div id="log-in">
-        <form  class="login-form" [formGroup]="verify"(ngSubmit)="onSubmit()">
+        <form class="login-form" [formGroup]="verify" (ngSubmit)="onSubmit()">
             <h1 class="login-heading">Identity Verification</h1>
             <div class="field-container -username">
 
@@ -39,7 +39,7 @@
             </div>
             <!-- if successful, link to change email page -->
             <button style="color: #fff;" type="submit" [disabled]="!verify.valid" class="auth-btn log-in-button bg-primary">
-            Log in
+            Verify
         </button>
 
 

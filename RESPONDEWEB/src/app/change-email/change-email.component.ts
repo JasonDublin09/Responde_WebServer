@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-change-email',
   templateUrl: './change-email.component.html',
@@ -11,11 +11,12 @@ export class ChangeEmailComponent implements OnInit {
     "email": new FormControl
   })
 
-  constructor() { }
+  constructor(private router: Router,) { }
 
   ngOnInit(): void {
   }
 onSubmit(){
-  
+  alert('Update successful');
+  this.router.navigate(['/profile']);
 }
 }

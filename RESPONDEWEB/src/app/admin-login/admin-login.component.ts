@@ -30,7 +30,7 @@ export class AdminLoginComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private afauth:AngularFireAuth
+    private afAuth:AngularFireAuth
   ) { }
 
   ngOnInit() {
@@ -38,8 +38,7 @@ export class AdminLoginComponent implements OnInit {
   }
 onSubmit(){
   if (this.adminLogin.valid){
-    console.log(this.adminLogin.value);
-     this.authService.login(
+      this.authService.login(
       this.adminLogin.value.email,
       this.adminLogin.value.password
     )
@@ -47,7 +46,7 @@ onSubmit(){
     console.log(this.authService.admindata)
     return this.authService.admindata
   }
-   /*this.afauth.authState.subscribe(res=>{
+  /*this.afauth.authState.subscribe(res=>{
       if (res && res.uid){
         console.log('user login');
         this.admindata=this.adminLogin.value
@@ -63,9 +62,18 @@ onSubmit(){
   }
 
 reset(){
+  /* this.afAuth.fetchSignInMethodsForEmail(this.adminLogin.value.email)
+  .then(function(signInMethods) {
+    if (signInMethods.length > 0) {
+      console.log('not 0');
+    } else{
+      console.log('0');
+    }
+  }) */
+    console.log(this.adminLogin.value.email);
     console.log(this.resetpass.value.reset);
     this.authService.resetpassword(this.resetpass.value.reset)
-  
+    //alert("Email has been sent successfully");
 }
 }
 

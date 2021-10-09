@@ -71,7 +71,7 @@ export class ReportHistoryComponent implements OnInit {
       data.forEach(item => {
         let a = item.payload.key;
         this.ReportHistory!.push(a as ReportHistory);
-        console.log(item.payload.val());
+        //console.log(item.payload.val());
       })
     })
   }
