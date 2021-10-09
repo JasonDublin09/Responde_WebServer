@@ -52,12 +52,14 @@ export class AuthService {
 
   return this.afAuth.signInWithEmailAndPassword(email,password).then((data)=>{
     console.log('Login User Success');
+    alert('Login User Success');
     this.admindata={email:email,password:password}
     console.log(this.admindata)
     this.router.navigate(['/dashboard']);
   })
   .catch(error =>{
-    console.log("login error")
+    console.log("login error");
+    alert("Login error. Incorrect email or passsword.")
   })
 };
 
@@ -87,8 +89,8 @@ export class AuthService {
   }
 
   resetpassword(email:string){
-    this.afAuth.sendPasswordResetEmail(email).then(()=>{console.log("Reset Sent")}).catch((error)=>{var ErrorCode=error.code;
-      console.log(ErrorCode)})
+    this.afAuth.sendPasswordResetEmail(email).then(()=>{alert("Email sent successfully.\nPlease check your email.")}).catch((error)=>{var ErrorCode=error.code;
+      console.log(ErrorCode); alert('Invalid Email')})
   }
 
   updatePassword ( email:string, password:string, updatepass:string ) {
@@ -112,19 +114,19 @@ export class AuthService {
     this.incomingReportRef = this.db.list('/IncomingReport/');
     return this.incomingReportRef;
   }
-  getReportList(){
+  /* getReportList(){
     this.historyReportRef = this.db.list('/ReportHistory/');
     return this.historyReportRef;
-  }
+  } */
   get(uid: any){
     // access db child
     return this.db.object('/IncomingReport/' + uid);
   }
 
-  getArchive(uid: any){
+  /* getArchive(uid: any){
     // access db child
     return this.db.object('/ReportHistory/' + uid);
-  }
+  } */
 
   updateNote(uid: string, value:any): void{
     this.db.list('/IncomingReport/').update(uid,value)

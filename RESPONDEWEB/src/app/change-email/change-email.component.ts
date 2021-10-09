@@ -20,7 +20,7 @@ export class ChangeEmailComponent implements OnInit {
   }
 onSubmit(){
   this.authService.updateEmail(this.authService.admindata.email,this.authService.admindata.password,this.changeemail.value.email)
-  this.router.navigateByUrl('login')
-  
+  alert('Update successful');
+  this.router.navigateByUrl('login');
 }
 }

@@ -30,9 +30,10 @@ export class EmailverificationComponent implements OnInit {
       
     }
     console.log(this.verify.value)
-    this.router.navigateByUrl('/changeemail')
     //if (this.authService.admindata == this.verify.value){
       
+      alert('User verified');
+      this.router.navigateByUrl('/changeemail')
     //}
    
     

@@ -30,6 +30,7 @@ export class ChangePasswordVerificationComponent implements OnInit {
     if (this.authService.admindata == this.verification.value){
       
     }
+    alert('User verified');
     this.router.navigateByUrl('changepassword')
     
       }

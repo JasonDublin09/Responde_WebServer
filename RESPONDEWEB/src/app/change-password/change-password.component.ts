@@ -21,12 +21,14 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.authService.admindata)
   }
-onSubmit(){
+  onSubmit(){
   console.log(this.authService.admindata)
   this.authService.updatePassword(this.authService.admindata.email,this.authService.admindata.password,this.updatepassword.value.password1)
+  
+  alert('Update successful');
   this.router.navigateByUrl('login')
   
   
 
-}
+  }
 }
