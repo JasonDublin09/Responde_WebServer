@@ -25,6 +25,7 @@ export class FullArchivedReportComponent implements OnInit {
   public report_notes: any;
   public report_email: any;
   public report_status: any;
+  public report_reason: any;
 
   report: any;
 
@@ -52,10 +53,15 @@ export class FullArchivedReportComponent implements OnInit {
       this.report_option = this.report.option;
       this.report_date = this.report.date;
       this.report_email = this.report.email;
-      this.report_status = this.report.status;
       this.lng=this.report.lng
       this.lat= this.report.lat
       this.report_notes = this.report.notes[0].notes;
+      if(this.report.status == 'Responded' && this.report.status2 == 'Declined'){
+        this.report_status = this.report.status2;
+        this.report_reason = this.report.reason;
+      } else{
+        this.report_status = this.report.status;
+      }
       console.log(r);
 
       const mapproperties={
@@ -75,7 +81,7 @@ export class FullArchivedReportComponent implements OnInit {
       
       
     });
- 
+
   }
 
   editNote(){

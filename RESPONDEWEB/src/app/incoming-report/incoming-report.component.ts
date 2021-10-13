@@ -32,43 +32,39 @@ export interface IncomingReport {
   styleUrls: ['./incoming-report.component.css']
 })
 
-export class IncomingReportComponent implements OnInit {
-  displayedColumns: string[] = ['key','name','home','contact','date','actions'];
+export class IncomingReportComponent implements AfterViewInit {
+  displayedColumns: string[] = ['key','date','name','home','contact','actions'];
   dataSource : any;
   IncomingReport?:  IncomingReport[];
 
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort?: MatSort;
 
-  constructor(private db: AngularFireDatabase, private router: Router, private authService: AuthService) { 
+
+  constructor(private db: AngularFireDatabase, private router: Router, private authService: AuthService,) { 
     
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource([]);
-    
-    /* let s = this.authService.getIncomingReportList();
-    s.snapshotChanges().subscribe(data => {
-      this.dataSource.data = data
-      this.IncomingReport = [];
-      data.forEach(item => {
-        let a = item.payload.key;
-        this.IncomingReport!.push(a as IncomingReport);
-        console.log(item.payload.val());
-      })
-    }) */
+    this.dataSource = new MatTableDataSource<IncomingReport>([]);
 
     this.db.list('IncomingReport/', ref => ref.orderByChild('status').equalTo(''))
     .snapshotChanges().subscribe(data => {
       this.dataSource.data = data
+
       this.IncomingReport = [];
+      console.log(data);
       data.forEach(item => {
         let a = item.payload.key;
-        this.IncomingReport!.push(a as IncomingReport);
-        console.log(item.payload.val());
+        let val:any = item.payload;
+        this.IncomingReport!.push(val as IncomingReport);
+        
       })
     })
 
+  }
+
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

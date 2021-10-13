@@ -76,14 +76,13 @@ export class FullIncomingReportComponent implements OnInit {
       
     });
 
-    
-      
   }
 
   respondReport(){
     if (this.report_uid) this.authService.get(this.report_uid).snapshotChanges().subscribe(data => {
 
-      this.authService.get(this.report_uid).update({status: "Responded"});
+      this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+      this.router.navigateByUrl('/incomingreport');
     });
   }
 

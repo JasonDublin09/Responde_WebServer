@@ -33,47 +33,41 @@ export interface ReportHistory {
   styleUrls: ['./report-history.component.css']
 })
 
-export class ReportHistoryComponent implements OnInit {
-  displayedColumns: string[] = ['key','name','home','contact','date','actions'];
-  dataSource : any;
+export class ReportHistoryComponent implements AfterViewInit {
+  displayedColumns: string[] = ['key','date','name','home','contact','status','actions'];
   ReportHistory?:  ReportHistory[];
-
+  
+  dataSource : any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private db: AngularFireDatabase, private router: Router, private authService: AuthService) { 
     
   }
-
-  
   ngOnInit() {
-
-    this.dataSource = new MatTableDataSource([]);
-    
-    /* let s = this.authService.getReportList();
-    s.snapshotChanges().subscribe(data => {
-      this.dataSource.data = data
-      this.ReportHistory = [];
-      data.forEach(item => {
-        let a = item.payload.key;
-        this.ReportHistory!.push(a as ReportHistory);
-        console.log(item.payload.val());
-      })
-    }) */
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
+    this.dataSource = new MatTableDataSource<ReportHistory>([]);
+    console.log(this.dataSource);
+    console.log(this.dataSource.filteredData);
     this.db.list('IncomingReport/', ref => ref.orderByChild('status').equalTo('Responded'))
     .snapshotChanges().subscribe(data => {
-      this.dataSource.data = data
+      this.dataSource.data = data;
+      
       this.ReportHistory = [];
       data.forEach(item => {
         let a = item.payload.key;
-        this.ReportHistory!.push(a as ReportHistory);
-        //console.log(item.payload.val());
+        let val:any = item.payload;
+        let status = val.status;
+        
+        this.ReportHistory!.push(val as ReportHistory);
+        
       })
     })
+
+  }
+
+  ngAfterViewInit(){
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   logData(row: any){
