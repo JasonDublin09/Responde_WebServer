@@ -36,6 +36,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AuthService } from './auth.service';
 import { EmailverificationComponent } from './emailverification/emailverification.component';
 import { ViewreportsComponent } from './viewreports/viewreports.component';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
 /* Table */
@@ -90,6 +91,7 @@ export class MaterialModule {}
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    ClipboardModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

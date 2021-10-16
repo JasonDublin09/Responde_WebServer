@@ -15,7 +15,7 @@ export class FullArchivedReportComponent implements OnInit {
   map:any;
   lat:any;
   lng:any;
-
+  value = '';
   public report_uid: any;
   public report_name: any;
   public report_address: any;
@@ -55,7 +55,10 @@ export class FullArchivedReportComponent implements OnInit {
       this.report_email = this.report.email;
       this.lng=this.report.lng
       this.lat= this.report.lat
-      this.report_notes = this.report.notes[0].notes;
+      if(this.report.notes != null){
+        this.report_notes = this.report.notes[0].notes;
+      }
+      //this.report_notes = this.report.notes[0].notes;
       if(this.report.status == 'Responded' && this.report.status2 == 'Declined'){
         this.report_status = this.report.status2;
         this.report_reason = this.report.reason;
@@ -86,12 +89,16 @@ export class FullArchivedReportComponent implements OnInit {
 
   editNote(){
     
-    if (this.report_uid) this.authService.updateNote(this.report_uid, {notes: this.detailItems});
-    this.report_notes = this.detailItems[0].notes;
-    console.log(this.report_notes);
+    
+    if(window.confirm('Do you want to save changes to the report notes?')){
+      if (this.report_uid) this.authService.updateNote(this.report_uid, {notes: this.detailItems});
+      this.report_notes = this.detailItems[0].notes;
+      console.log(this.report_notes);
+    }
   }
 
   setTitleEdit(item) {
     item.canEditCode = true;
   }
+
 }
