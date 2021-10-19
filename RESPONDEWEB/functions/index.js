@@ -18,9 +18,10 @@ const client = new twilio(accountSid,authToken);
 
 exports.sendText = functions.https.onCall(async(data,context) =>{
   
+
   return client.messages 
   .create({ 
-     body: 'dad', 
+     body: 'foo', 
      from: '+15155237903',       
      to: data
    }) 
