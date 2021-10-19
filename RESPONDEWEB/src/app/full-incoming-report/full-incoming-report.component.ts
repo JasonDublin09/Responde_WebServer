@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import * as firebase from 'firebase';
 import { AuthService } from '../auth.service';
 import { Loader } from '@googlemaps/js-api-loader';
+import {AngularFireFunctions} from '@angular/fire/functions';
 
 @Component({
   selector: 'app-full-incoming-report',
@@ -31,7 +32,7 @@ export class FullIncomingReportComponent implements OnInit {
   reasons: any = ['Duplicate Report', 'False Alarm', 'Forwarded to other Station', 'Fake Report'];
 
   reports?: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService, private router: Router) { 
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService, private router: Router, private afFun:AngularFireFunctions) { 
   
   }
 
@@ -80,10 +81,16 @@ export class FullIncomingReportComponent implements OnInit {
 
   respondReport(){
     if (this.report_uid) this.authService.get(this.report_uid).snapshotChanges().subscribe(data => {
-
+      
+      
       this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+      const call = this.afFun.httpsCallable("sendText");
+      call("+639983740321").subscribe(response=>console.log(response));
+      
       this.router.navigateByUrl('/incomingreport');
     });
+    
+    
   }
 
   declineReport(){

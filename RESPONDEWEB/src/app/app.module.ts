@@ -83,6 +83,7 @@ export class MaterialModule {}
     FullIncomingReportComponent,
     FullArchivedReportComponent,
     EmailverificationComponent,
+    ViewreportsComponent
   
   ],
   imports: [
