@@ -36,7 +36,7 @@
             </div>
             <div class="field-container -password">
 
-                <input type="password" placeholder="Password" formControlName="password" required/>
+                <input type="password" placeholder="Password" formControlName="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
             </div>
             <button style="color: #fff;" type="submit" [disabled]="!adminLogin.valid" class="auth-btn log-in-button bg-primary">
             Log in
@@ -47,48 +47,48 @@
         </a>
         </form>
 
-            <!-- Modal -->
-            <script>
-                $('input').focus(function() {
-                    var input = $(this);
-                    input.closest('.field-container').addClass('-focused');
-                });
+        <!-- Modal -->
+        <script>
+            $('input').focus(function() {
+                var input = $(this);
+                input.closest('.field-container').addClass('-focused');
+            });
 
-                $('input').blur(function() {
-                    var input = $(this);
-                    if (input.val().length === 0) {
-                        input.closest('.field-container').removeClass('-focused');
-                    }
-                });
-            </script>
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+            $('input').blur(function() {
+                var input = $(this);
+                if (input.val().length === 0) {
+                    input.closest('.field-container').removeClass('-focused');
+                }
+            });
+        </script>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
 
-                    <!-- Modal content-->
+                <!-- Modal content-->
 
-                    <div class="modal-content">
-                        <div class="modal-header row">
-                            <h4 class="modal-title">Forgot Password</h4>
-                        </div>
-
-                        <div class="modal-body">
-                            <form class="login-form"[formGroup]="resetpass" (ngSubmit)="reset()">
-                                <p class="login-copy">Enter admin email where password reset link will be sent.</p>
-                                <div class="field-container -username">
-
-                                    <input type="email"formControlName="reset" placeholder="Email" required/>
-                                </div>
-
-                                <button style="color: #fff;" type="submit" class="auth-btn log-in-button bg-primary"type="submit" [disabled]="!resetpass">Send Email</button>
-                            </form>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                <div class="modal-content">
+                    <div class="modal-header row">
+                        <h4 class="modal-title">Forgot Password</h4>
                     </div>
 
+                    <div class="modal-body">
+                        <form class="login-form" [formGroup]="resetpass" (ngSubmit)="reset()">
+                            <p class="login-copy">Enter admin email where password reset link will be sent.</p>
+                            <div class="field-container -username">
+
+                                <input type="email" formControlName="reset" placeholder="Email" required/>
+                            </div>
+
+                            <button style="color: #fff;" type="submit" class="auth-btn log-in-button bg-primary" type="submit" [disabled]="!resetpass">Send Email</button>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
+
             </div>
+        </div>
     </div>
 </div>
