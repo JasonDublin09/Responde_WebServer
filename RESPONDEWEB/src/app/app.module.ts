@@ -27,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ChangeEmailComponent } from './change-email/change-email.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
+//import { ChangeEmailVerificationComponent } from './change-email-verification/change-email-verification.component';
 import { ChangePasswordVerificationComponent } from './change-password-verification/change-password-verification.component';
 import { AdminLoginGuard } from './route-guard/admin-login.guard';
 import { LoginguardGuard } from './route/loginguard.guard';
@@ -76,7 +76,7 @@ export class MaterialModule {}
     ProfilePageComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
-    ChangeEmailVerificationComponent,
+    //ChangeEmailVerificationComponent,
     ChangePasswordVerificationComponent,
     ResetPasswordComponent,
     FooterComponent,
@@ -114,7 +114,7 @@ export class MaterialModule {}
       {path:'profile', component:ProfilePageComponent},
       {path:'changeemail', component:ChangeEmailComponent},
       {path:'changepassword', component:ChangePasswordComponent},
-      {path:'emailchanges', component:ChangeEmailVerificationComponent},
+      //{path:'emailchanges', component:ChangeEmailVerificationComponent},
       {path:'passwordchange', component:ChangePasswordVerificationComponent},
       {path:'reset-password', component:ResetPasswordComponent},
       {path:'emailverification', component:EmailverificationComponent},

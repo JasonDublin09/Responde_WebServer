@@ -23,12 +23,14 @@ export class ChangePasswordComponent implements OnInit {
   }
   onSubmit(){
   console.log(this.authService.admindata)
-  this.authService.updatePassword(this.authService.admindata.email,this.authService.admindata.password,this.updatepassword.value.password1)
+  if (this.updatepassword.value.password1 == this.updatepassword.value.password2){
+    this.authService.updatePassword(this.authService.admindata.email,this.authService.admindata.password,this.updatepassword.value.password1)
   
-  alert('Update successful');
-  this.router.navigateByUrl('login')
+    alert('Update successful');
+    this.router.navigateByUrl('login')
+  } else{
+    alert('Password does not match');
+  }
   
-  
-
   }
 }

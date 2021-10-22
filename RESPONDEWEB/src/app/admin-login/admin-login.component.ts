@@ -45,6 +45,9 @@ onSubmit(){
     this.authService.admindata=this.adminLogin.value
     console.log(this.authService.admindata)
     return this.authService.admindata
+  } else{
+    alert('Login failed');
+    location.reload();
   }
   /*this.afauth.authState.subscribe(res=>{
       if (res && res.uid){
