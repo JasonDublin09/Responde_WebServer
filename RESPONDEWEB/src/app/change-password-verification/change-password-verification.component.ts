@@ -35,7 +35,7 @@ export class ChangePasswordVerificationComponent implements OnInit {
       alert('User verified');
     this.router.navigateByUrl('changepassword')
     }else {
-      alert('Wrond Credentials')
+      alert('Wrong Credentials')
     }
     
     
