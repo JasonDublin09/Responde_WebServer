@@ -23,15 +23,21 @@ export class ChangePasswordVerificationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let email = localStorage.getItem('email')
+    let password = localStorage.getItem('password')
+    console.log(email)
+    console.log(password)
   }
   onSubmit(){
-    console.log(this.authService.admindata)
-    console.log(this.verification.value)
-    if (this.authService.admindata == this.verification.value){
-      
-    }
-    alert('User verified');
+    let email = localStorage.getItem('email')
+    let password = localStorage.getItem('password')
+    if (email == this.verification.value.email && password == this.verification.value.password){
+      alert('User verified');
     this.router.navigateByUrl('changepassword')
+    }else {
+      alert('Wrond Credentials')
+    }
+    
     
       }
       

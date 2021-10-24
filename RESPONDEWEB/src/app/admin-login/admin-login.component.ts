@@ -42,7 +42,9 @@ onSubmit(){
       this.adminLogin.value.email,
       this.adminLogin.value.password
     )
-    this.authService.admindata=this.adminLogin.value
+    // this.authService.admindata=this.adminLogin.value
+    localStorage.setItem("email",this.adminLogin.value.email)
+    localStorage.setItem("password",this.adminLogin.value.password)
     console.log(this.authService.admindata)
     return this.authService.admindata
   } else{

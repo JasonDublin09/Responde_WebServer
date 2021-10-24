@@ -1,6 +1,12 @@
 {
   "hosting": {
     "public": "dist/RESPONDEWEB",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -11,5 +17,6 @@
     "source": "functions",
     "predeploy": [
     ]
+    
   }
 }
