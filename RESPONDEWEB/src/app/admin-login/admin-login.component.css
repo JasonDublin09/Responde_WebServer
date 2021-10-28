@@ -13,6 +13,10 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
 }
 
+.container {
+    margin-left: 0!important;
+}
+
 .navbar-brand,
 .nav-link,
 .my-form,

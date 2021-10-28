@@ -29,11 +29,12 @@ body {
 
 /* Footer */
 
-footer {
+
+/* footer {
     margin-top: auto;
     padding: 3em;
-    background: #333;
-}
+    height: 3em;
+} */
 
 body {
     margin: 0;
