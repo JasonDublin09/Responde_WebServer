@@ -82,27 +82,21 @@ export class FullIncomingReportComponent implements OnInit {
   respondReport(){
     if (this.report_uid) this.authService.get(this.report_uid).snapshotChanges().subscribe(data => {
       
+      console.log(this.report.emcon)
       
-      this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+      
       const call = this.afFun.httpsCallable("sendText");
-      call("+639983740321").subscribe(response=>{
+      // this.report.emcon.forEach(element => {
+      //   call(this.report)
+        
+      // });
+      call(this.report).subscribe(response=>{
         console.log(response)
+        this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
         this.router.navigateByUrl('/incomingreport');
       });
-
-      // I think it really wouldn't work kasi you're already routing away before it finishes the call
-      // I am not sure if the code on the index.js works ah, it's not tested, so you have to test it muna
-      // Sige sigeeeeee hmu when errors persist
-      // Also, pakibago line 88 to an array ah and don't forget to comment out your previous code sa index.js
-      // 🙇‍♂️🙇‍♂️🙇‍♂️ imma be leavin gambateeee!!!
       
-      //the response doesnt work.. its just there for the confirm that i pressed it 
-      //yeah i have to test it pa... and check din if the google console can take multiple reports 
-      //apparently kasi sending way to many causes the console to slow down even the logs doesnt respond verry well
-      // yeah i'll try that out later thanks 
-
-      //okay i'll do that 
-      //okay thanks
+      
     });
     
     

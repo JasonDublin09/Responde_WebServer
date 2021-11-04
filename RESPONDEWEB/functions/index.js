@@ -17,29 +17,40 @@ const authToken = functions.config().twilio.token;
 const client = new twilio(accountSid,authToken);
 
 exports.sendText = functions.https.onCall(async(data,context) =>{
+
+  const arr = data.emcon;
+  // arr.forEach(element => {
+//     return client.messages
+//     .create({
+//       body: "A Report has been sent to the Fire Station from " + data.name + " at this location " + data.home, 
+//       to: "+63"+element,
+//       from:'+15155237903',
+//     })
+//     .then(message=>console.log(message.sid)).done()
+    
+//   });
+// });
+
+  // return client.messages 
+  // .create({ 
+  //    body: "A Report has been sent to the Fire Station from " + data.name + " at this location " + data.home, 
+  //    from: '+15155237903',       
+  //    to: "+63"+data.emcon[0]
+  //  }) 
+  // .then(message => console.log(message.sid)) 
+  // .done();
+
+  return Promise.all(arr.map(values=> {
+    return client.messages
+    .create({
+      body: "A Report has been sent to the Fire Station from " + data.name + " at this location " + data.home,
+      from: '+15155237903',
+      to: "+63"+values
+    }).then(message=>console.log(message.sid))
+  }))
+});
+// });
   
-
-  return client.messages 
-  .create({ 
-     body: 'foo', 
-     from: '+15155237903',       
-     to: data
-   }) 
-  .then(message => console.log(message.sid)) 
-  .done();
-
-  // Henlooooo
-  // So you said kanina right na nahihirapan mag-function call kapag marami?
-
-  //yea 
-
-  //so far ung client.messages na yan kaya lng pa isa isa na request
-  //so if madaming contacts ang sesendan it takes a long time to process all of the requests
-  //tho it sends naman kaagad ung request sa firebase 
-  
-  // Hmmmmm I think what you can do is use data as an array and then process it here
-  // imma provide a code snippet here
-  // wherein data is an array of 'to' data
   
   // return Promise.all(data.map(datum => {
   //   return client.messages 
@@ -56,5 +67,3 @@ exports.sendText = functions.https.onCall(async(data,context) =>{
   // })
 
   //so this snippet can get all of the numbers and send all of them to twilio to the phones?
-  
-});
