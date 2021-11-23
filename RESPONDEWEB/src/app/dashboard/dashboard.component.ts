@@ -34,6 +34,7 @@ export class DashboardComponent implements AfterViewInit {
   dataSource : any;
   incomingReportLength: any;
   reportHistoryLength: any;
+  incidentReportLength: any;
 
   displayedColumns: string[] = ['key','date','name','home','contact','actions'];
   IncomingReport?:  IncomingReport[];
@@ -54,6 +55,11 @@ export class DashboardComponent implements AfterViewInit {
     this.db.list('/IncomingReport/', ref => ref.orderByChild("status").equalTo('Responded')).snapshotChanges().subscribe(data => {
       this.reportHistoryLength=(data.length);
       console.log(this.reportHistoryLength);
+    });
+
+    this.db.list('/IncidentReport/').snapshotChanges().subscribe(data => {
+      this.incidentReportLength=(data.length);
+      console.log(this.incidentReportLength);
     });
 
     this.dataSource = new MatTableDataSource<IncomingReport>([]);

@@ -36,6 +36,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AuthService } from './auth.service';
 import { EmailverificationComponent } from './emailverification/emailverification.component';
 import { ViewreportsComponent } from './viewreports/viewreports.component';
+import { IncidentReportComponent } from './incident-report/incident-report.component';
+
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
 
@@ -46,6 +48,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+
+/* Form */
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -59,6 +64,8 @@ import {MatInputModule} from '@angular/material/input';
     MatSortModule
   ],
   declarations: [
+    
+  
     
   ]
 })
@@ -76,14 +83,14 @@ export class MaterialModule {}
     ProfilePageComponent,
     ChangeEmailComponent,
     ChangePasswordComponent,
-    //ChangeEmailVerificationComponent,
     ChangePasswordVerificationComponent,
     ResetPasswordComponent,
     FooterComponent,
     FullIncomingReportComponent,
     FullArchivedReportComponent,
     EmailverificationComponent,
-    ViewreportsComponent
+    ViewreportsComponent,
+    IncidentReportComponent,
   
   ],
   imports: [
@@ -103,6 +110,8 @@ export class MaterialModule {}
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+
+    MatDatepickerModule,
     
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -114,17 +123,17 @@ export class MaterialModule {}
       {path:'profile', component:ProfilePageComponent},
       {path:'changeemail', component:ChangeEmailComponent},
       {path:'changepassword', component:ChangePasswordComponent},
-      //{path:'emailchanges', component:ChangeEmailVerificationComponent},
       {path:'passwordchange', component:ChangePasswordVerificationComponent},
       {path:'reset-password', component:ResetPasswordComponent},
       {path:'emailverification', component:EmailverificationComponent},
-      {path:'viewreport',component:ViewreportsComponent}
+      {path:'viewreport',component:ViewreportsComponent},
+      {path:'incidentreport', component:IncidentReportComponent},
       /* full report path in auth service */
       
     ])
     
   ],
-  providers: [AngularFireAuthGuard,AuthService],
+  providers: [AngularFireAuthGuard,AuthService,MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

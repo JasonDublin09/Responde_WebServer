@@ -23,7 +23,7 @@ export class AuthService {
   userloggedin: boolean;
   admindata:any
   incomingReportRef?: AngularFireList<any>;
-  historyReportRef?: AngularFireList<any>;
+  incidentReportRef?: AngularFireList<any>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -114,10 +114,10 @@ export class AuthService {
     this.incomingReportRef = this.db.list('/IncomingReport/');
     return this.incomingReportRef;
   }
-  /* getReportList(){
-    this.historyReportRef = this.db.list('/ReportHistory/');
-    return this.historyReportRef;
-  } */
+  getIncidentReportList(){
+    this.incidentReportRef = this.db.list('/IncidentReport/');
+    return this.incidentReportRef;
+  }
   get(uid: any){
     // access db child
     return this.db.object('/IncomingReport/' + uid);
