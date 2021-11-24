@@ -1,147 +1,266 @@
-<!-- Page Wrapper -->
-<div id="wrapper">
+<body>
 
-    <!-- sidenav -->
-    <app-sidenav></app-sidenav>
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-        <!-- Main Content -->
-        <div id="content">
+        <!-- sidenav -->
+        <app-sidenav></app-sidenav>
 
-            <!-- Topbar -->
-            <app-topbar></app-topbar>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <!-- Main Content -->
+            <div id="content">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800" style="padding-left:10px;">Incident Reports</h1>
-                </div>
+                <!-- Topbar -->
+                <app-topbar></app-topbar>
 
-                <!-- Content Row -->
-                <div class="container">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800" style="padding-left:10px;">Incident Reports</h1>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="container row">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form">
                         <i class='fas fa-plus'></i> Add New Form
                     </button>
-                </div>
-                <!-- FORM MODAL -->
-                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header border-bottom-0">
-                                <h4 class="modal-title" id="exampleModalLabel">Incident Report Form</h4>
-                                <button #myModalClose type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </div>
+                    <!-- FORM MODAL -->
+                    <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header border-bottom-0">
+                                    <h4 class="modal-title" id="exampleModalLabel">Incident Report Form</h4>
+                                    <button #myModalClose type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                                 </button>
+                                </div>
+
+                                <form (ngSubmit)="onSubmit()">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="dateprepared">Date Prepared: </label>
+                                            <input type="datetime-local" id="dateprepared" name="dateprepared" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Prepared by: </label>
+                                            <input type="text" class="form-control" id="name" placeholder="Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Address of Incident: </label>
+                                            <input type="text" class="form-control" id="address" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="incidentdate">Incident Date: </label>
+                                            <input type="datetime-local" id="incidentdate" name="incidentdate" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="houses">House/s Affected:</label>
+                                            <input type="number" id="houses" name="houses" placeholder="1" min="1" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="injuredcivil">Injured Civilians:</label>
+                                            <input type="number" id="injuredcivil" name="injuredcivil" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="casualtycivil">Civilian Casualty:</label>
+                                            <input type="number" id="casualtycivil" name="casualtycivil" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="injuredresponder">Injured Firefighters:</label>
+                                            <input type="number" id="injuredresponder" name="injuredresponder" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="casualtyresponder">Firefighters Casualty:</label>
+                                            <input type="number" id="casualtyresponder" name="casualtyresponder" placeholder="0" min="0" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="start">Time Fire Started: </label>
+                                            <input type="time" id="start" name="start" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ext">Time Fire Extinguished: </label>
+                                            <input type="time" id="ext" name="ext" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="other">Other Details: </label>
+                                            <textarea id="other" name="other" style="min-height: 150px; min-width: 250px;"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                        <button type="submit" id="btn" class="btn btn-success">Submit</button>
+                                    </div>
+
+
+                                </form>
                             </div>
+                        </div>
+                    </div>
 
-                            <form (ngSubmit)="onSubmit()">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="dateprepared">Date Prepared: </label>
-                                        <input type="datetime-local" id="dateprepared" name="dateprepared" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Prepared by: </label>
-                                        <input type="text" class="form-control" id="name" placeholder="Name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Address of Incident: </label>
-                                        <input type="text" class="form-control" id="address" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="incidentdate">Incident Date: </label>
-                                        <input type="datetime-local" id="incidentdate" name="incidentdate" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="houses">House/s Affected:</label>
-                                        <input type="number" id="houses" name="houses" placeholder="1" min="1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="injuredcivil">Injured Civilians:</label>
-                                        <input type="number" id="injuredcivil" name="injuredcivil" placeholder="0" min="0" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="casualtycivil">Civilian Casualty:</label>
-                                        <input type="number" id="casualtycivil" name="casualtycivil" placeholder="0" min="0" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="injuredresponder">Injured Firefighters:</label>
-                                        <input type="number" id="injuredresponder" name="injuredresponder" placeholder="0" min="0" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="casualtyresponder">Firefighters Casualty:</label>
-                                        <input type="number" id="casualtyresponder" name="casualtyresponder" placeholder="0" min="0" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="start">Time Fire Started: </label>
-                                        <input type="time" id="start" name="start" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="ext">Time Fire Extinguished: </label>
-                                        <input type="time" id="ext" name="ext" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="other">Other Details: </label>
-                                        <textarea id="other" name="other" style="min-height: 150px; min-width: 250px;"></textarea>
-                                    </div>
+                    <!-- filter-->
+                    <div class="example-header">
+                        <mat-form-field style="margin-left:-15px;">
+                            <mat-label>Filter</mat-label>
+                            <input (keyup)="applyFilter($event)" class="" matInput placeholder="Filter" #input>
+                        </mat-form-field>
+                    </div>
+                    <!-- class="mat-elevation-z8" -->
 
+                    <!-- table -->
+                    <div class="row">
+                        <div class="col-xl-8 col-xl-10">
+                            <div class="card shadow-sm mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+
+                                    <div class=" table-wrapper mat-elevation-z8">
+
+                                        <!-- Table class="data-table" -->
+                                        <mat-table [dataSource]="dataSource" matSort class="data-table" matSortActive="key" matSortDirection="desc">
+
+                                            <!-- ID Column -->
+                                            <ng-container matColumnDef="key">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.key}} </td>
+                                            </ng-container>
+
+                                            <!-- Date Column -->
+                                            <ng-container matColumnDef="date_prepared">
+                                                <th mat-header-cell *matHeaderCellDef> Date Prepared </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().date_prepared}} </td>
+                                            </ng-container>
+
+
+                                            <!-- Name of Reporter Column -->
+
+                                            <ng-container matColumnDef="name">
+                                                <th mat-header-cell *matHeaderCellDef> Prepared By </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().name}} </td>
+                                            </ng-container>
+
+                                            <!-- Address Name Column -->
+                                            <ng-container matColumnDef="address">
+                                                <th mat-header-cell *matHeaderCellDef> Address of Incident </th>
+                                                <td mat-cell *matCellDef="let element" class="word-breakall"> {{element.payload.val().address}} </td>
+                                            </ng-container>
+
+                                            <!-- Contact Column -->
+                                            <ng-container matColumnDef="date_incident">
+                                                <th mat-header-cell *matHeaderCellDef> Incident Date </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().date_incident}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="house">
+                                                <th mat-header-cell *matHeaderCellDef> House/s Affected </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().house}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="injuredCivilian">
+                                                <th mat-header-cell *matHeaderCellDef> Injured Civilians </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().injuredCivilian}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="casualtyCivilian">
+                                                <th mat-header-cell *matHeaderCellDef> Civilian Casualty </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().casualtyCivilian}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="injuredFirefighter">
+                                                <th mat-header-cell *matHeaderCellDef> Injured Firefighters </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().injuredFirefighter}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="casualtyFirefighter">
+                                                <th mat-header-cell *matHeaderCellDef> Fireefighters Casualty </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().casualtyFirefighter}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="time_start">
+                                                <th mat-header-cell *matHeaderCellDef> Fire Started </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().time_start}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="time_extinguished">
+                                                <th mat-header-cell *matHeaderCellDef> Fire Extinguished </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.payload.val().time_extinguished}} </td>
+                                            </ng-container>
+
+                                            <!-- Status Column -->
+                                            <ng-container matColumnDef="other">
+                                                <th mat-header-cell *matHeaderCellDef> Other Details </th>
+                                                <td mat-cell class="word-breakall" *matCellDef="let element"> {{element.payload.val().other}} </td>
+                                            </ng-container>
+
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                            <!-- Row shown when there is no matching data. -->
+                                            <tr class="mat-row" *matNoDataRow>
+                                                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                            </tr>
+                                        </mat-table>
+
+
+                                        <mat-paginator class="mat-row" [pageSizeOptions]="[10,30,50,100]" showFirstLastButtons></mat-paginator>
+
+                                    </div>
                                 </div>
-                                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                    <button type="submit" id="btn" class="btn btn-success">Submit</button>
-                                </div>
-
-
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- End of Main Content -->
 
-                <!-- filter-->
-
-                <!-- class="mat-elevation-z8" -->
-
-                <!-- table -->
+                <!-- Footer -->
+                <!-- <app-footer></app-footer> -->
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <!-- <app-footer></app-footer> -->
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="#" data-dismiss="modal">Logout</a>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="#" data-dismiss="modal">Logout</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+</body>
