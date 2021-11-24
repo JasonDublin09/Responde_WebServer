@@ -29,8 +29,11 @@ export class IncidentReportComponent implements OnInit {
   public casualtyFirefighter: any;
   public time_start: any;
   public time_extinguised: any;
+  public other: any;
 
   constructor(private db: AngularFireDatabase, private authService: AuthService, private router:Router) { }
+  
+  @ViewChild('myModalClose') modalClose;
 
   ngOnInit(): void {
   }
@@ -47,6 +50,7 @@ export class IncidentReportComponent implements OnInit {
     let casualtyFirefighter = (<HTMLInputElement>document.getElementById("casualtyresponder")).value;
     let time_start = (<HTMLInputElement>document.getElementById("start")).value;
     let time_extinguised = (<HTMLInputElement>document.getElementById("ext")).value;
+    let other = (<HTMLInputElement>document.getElementById("other")).value;
 
     this.date_prepared = date_prepared
     this.name = name
@@ -59,6 +63,8 @@ export class IncidentReportComponent implements OnInit {
     this.casualtyFirefighter = casualtyFirefighter
     this.time_start = time_start
     this.time_extinguised = time_extinguised
+    this.other = other;
+
     if (date_prepared != "" && name != "" && address != "" && date_incident != "" && house != "" && injuredCivilian != "" &&
         casualtyCivilian != "" && injuredFirefighter != "" && casualtyFirefighter != "" && time_start != "" && time_extinguised != "") {
           // success
@@ -66,10 +72,10 @@ export class IncidentReportComponent implements OnInit {
           this.authService.getIncidentReportList()
             .push({date_prepared:this.date_prepared, name:this.name, address:this.address, date_incident:this.date_incident,
             house:this.house, injuredCivilian:this.injuredCivilian, casualtyCivilian:this.casualtyCivilian, injuredFirefighter:this.injuredFirefighter,
-            casualtyFirefighter:this.casualtyFirefighter, time_start:this.time_start, time_extinguised:this.time_extinguised});
+            casualtyFirefighter:this.casualtyFirefighter, time_start:this.time_start, time_extinguised:this.time_extinguised, other:this.other});
 
           alert('Incident Report created successfully!');
-          window.location.reload();
+          this.modalClose.nativeElement.click();
     } else{
       alert("Please fill out the whole form.");
     }
