@@ -123,6 +123,11 @@ export class AuthService {
     return this.db.object('/IncomingReport/' + uid);
   }
 
+  getReport(uid: any){
+    // access db child
+    return this.db.object('/IncidentReport/' + uid);
+  }
+
   /* getArchive(uid: any){
     // access db child
     return this.db.object('/ReportHistory/' + uid);

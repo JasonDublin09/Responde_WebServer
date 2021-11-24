@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="address">Address of Incident: </label>
-                                            <input type="text" class="form-control" id="address" required>
+                                            <input type="text" class="form-control" id="address" placeholder="Address"required>
                                         </div>
                                         <div class="form-group">
                                             <label for="incidentdate">Incident Date: </label>
@@ -123,7 +123,7 @@
                                     <div class=" table-wrapper mat-elevation-z8">
 
                                         <!-- Table class="data-table" -->
-                                        <mat-table [dataSource]="dataSource" matSort class="data-table" matSortActive="key" matSortDirection="desc">
+                                        <mat-table matTableExporter [dataSource]="dataSource" #exporter ="matTableExporter" matSort class="data-table" matSortActive="key" matSortDirection="desc">
 
                                             <!-- ID Column -->
                                             <ng-container matColumnDef="key">
@@ -205,6 +205,13 @@
                                                 <td mat-cell class="word-breakall" *matCellDef="let element"> {{element.payload.val().other}} </td>
                                             </ng-container>
 
+                                            <ng-container matColumnDef="actions">
+                                                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                                <td mat-cell *matCellDef="let row">
+                                                    <button (click)="onSelect(content,row)" class="pure-material-button-contained" mat-button>View</button>
+                                                </td>
+                                            </ng-container>
+
 
                                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                             <tr mat-row (click)="logData(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -216,7 +223,13 @@
                                         </mat-table>
 
 
+
+
                                         <mat-paginator class="mat-row" [pageSizeOptions]="[10,30,50,100]" showFirstLastButtons></mat-paginator>
+
+                                        <div>
+                                            &nbsp; &nbsp; <button mat-raised-button (click)="exporter.exportTable('xlsx',{fileName:'IncidentReport',columnWidths:[21,16,25,50,16,16,16,16,16,16,16,16,30]})">Export to CSV</button>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -262,5 +275,69 @@
             </div>
         </div>
     </div>
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class='modal-title'>Incident Reports</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.close('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="dateprepared">Date Prepared: </label>
+                <p> {{UID.payload.val().date_prepared}}</p>
+            </div>
+            <div class="form-group">
+                <label for="name">Prepared by: </label>
+                <p> {{UID.payload.val().name}}</p>
+            </div>
+            <div class="form-group">
+                <label for="address">Address of Incident: </label>
+                <p> {{UID.payload.val().address}}</p>
+            </div>
+            <div class="form-group">
+                <label for="incidentdate">Incident Date: </label>
+                <p> {{UID.payload.val().incidentdate}}</p>
+            </div>
+            <div class="form-group">
+                <label for="houses">House/s Affected:</label>
+                <p> {{UID.payload.val().house}}</p>
+            </div>
+            <div class="form-group">
+                <label for="injuredcivil">Injured Civilians:</label>
+                <p> {{UID.payload.val().injuredCivilian}}</p>
+            </div>
+            <div class="form-group">
+                <label for="casualtycivil">Civilian Casualty:</label>
+                <p> {{UID.payload.val().casualtyCivilian}}</p>
+            </div>
+            <div class="form-group">
+                <label for="injuredresponder">Injured Firefighters:</label>
+                <p> {{UID.payload.val().injuredFirefighter}}</p>
+            </div>
+            <div class="form-group">
+                <label for="casualtyresponder">Firefighters Casualty:</label>
+                <p> {{UID.payload.val().casualtyFirefighter}}</p>
+            </div>
+            <div class="form-group">
+                <label for="start">Time Fire Started: </label>
+                <p> {{UID.payload.val().time_start}}</p>
+            </div>
+            <div class="form-group">
+                <label for="ext">Time Fire Extinguished: </label>
+                <p> {{UID.payload.val().time_extinguished}}</p>
+            </div>
+            <div class="form-group">
+                <label for="other">Other Details: </label>
+                <p> {{UID.payload.val().other}}</p>
+            </div>
+
+        </div>
+        <div class="modal-footer border-top-0 d-flex justify-content-center">
+            <button mat-raised-button (click)="export()">Export Report</button>
+        </div>
+
+    </ng-template>
 
 </body>

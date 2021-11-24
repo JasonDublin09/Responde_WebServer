@@ -48,6 +48,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatButtonModule } from '@angular/material/button';
 
 /* Form */
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -110,6 +112,8 @@ export class MaterialModule {}
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatTableExporterModule,
 
     MatDatepickerModule,
     

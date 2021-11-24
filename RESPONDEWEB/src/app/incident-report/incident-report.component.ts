@@ -9,6 +9,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular
 import { Routes, RouterModule, Router} from '@angular/router';
 import { AuthService } from '../auth.service';
 import { AliasStrategy } from '@angular/compiler-cli/src/ngtsc/imports';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as XLSX from "xlsx";
+import { XLSX_COLS } from 'cdk-table-exporter';
 /* form */
 
 
@@ -37,7 +40,7 @@ export interface IncidentReport {
 export class IncidentReportComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['key','date_prepared','name','address','date_incident','house','injuredCivilian','casualtyCivilian',
-  'injuredFirefighter','casualtyFirefighter','time_start','time_extinguished','other'];
+  'injuredFirefighter','casualtyFirefighter','time_start','time_extinguished','other','actions'];
 
   IncidentReport?:  IncidentReport[];
   dataSource : any;
@@ -54,12 +57,15 @@ export class IncidentReportComponent implements AfterViewInit {
   public time_start: any;
   public time_extinguished: any;
   public other: any;
+  incidentref:any;
+  UID:any;
+  edata:any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('myModalClose') modalClose;
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService, private router:Router) { }
+  constructor(private db: AngularFireDatabase, private authService: AuthService, private router:Router,private modalService:NgbModal) { }
   
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<IncidentReport>([]);
@@ -142,6 +148,60 @@ export class IncidentReportComponent implements AfterViewInit {
     
   }
 
+  onSelect(content,row){
+   
+    this.modalService.open(content, { centered: true });
+    // console.log(this.dataSource.data);
+    for (var i in this.dataSource.data){
+      if(row.key ==this.dataSource.data[i].key){
+        this.UID=this.dataSource.data[i]
+        console.log(this.UID.payload.val())
+        this.edata=[
+          {
+            "Report ID":this.UID.key,
+            "Date Prepared":this.UID.payload.val().date_prepared,
+            "Prepared By":this.UID.payload.val().name,
+            "Address of Incident":this.UID.payload.val().address,
+            "Incident Date":this.UID.payload.val().date_incident,
+            "House/s Affected":this.UID.payload.val().house,
+            "Injured Civilians":this.UID.payload.val().injuredCivilian,
+            "Civilian Casualty":this.UID.payload.val().casualtyCivilian,
+            "Injured Firefighers":this.UID.payload.val().injuredFirefighter,
+            "FireFighter Casualty":this.UID.payload.val().casualtyFirefighter,
+            "Fire Started":this.UID.payload.val().time_start,
+            "Fire Extinguished":this.UID.payload.val().time_extinguished,
+            "Other Details":this.UID.payload.val().other
+          }
+        ]
+
+      }
+    }
+  
+    // this.router.navigate(['incoming-report', report.key]);
+    [21,16,25,50,16,16,16,16,16,16,16,16,30]
+  }
+  export(){
+    var wscols = [
+      {wch:21},
+      {wch:16},
+      {wch:25},
+      {wch:50},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:16},
+      {wch:30}
+    ];
+    var wb = XLSX.utils.book_new();
+    var ws = XLSX.utils.json_to_sheet(this.edata);
+    ws['!cols'] = wscols;
+    XLSX.utils.book_append_sheet(wb,ws,"IncidentReport");
+    XLSX.writeFile(wb,'IncidentReport.xlsx');
+  }
   
 
 }

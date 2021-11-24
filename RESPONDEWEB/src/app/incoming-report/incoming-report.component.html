@@ -42,7 +42,7 @@
                                 <div class=" table-wrapper mat-elevation-z8">
 
                                     <!-- Table class="data-table" -->
-                                    <mat-table class="data-table" [dataSource]="dataSource" matSort matSortActive="key" matSortDirection="desc">
+                                    <mat-table class="data-table" matTableExporter [dataSource]="dataSource" #exporter ="matTableExporter" matSort matSortActive="key" matSortDirection="desc">
 
                                         <!-- ID Column -->
                                         <ng-container matColumnDef="key">
@@ -95,6 +95,8 @@
 
 
                                     <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" class="mat-row" [pageSizeOptions]="[10,30,50,100]" showFirstLastButtons></mat-paginator>
+
+                                    
 
                                 </div>
                             </div>
