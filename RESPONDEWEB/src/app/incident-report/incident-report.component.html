@@ -123,7 +123,7 @@
                                     <div class=" table-wrapper mat-elevation-z8">
 
                                         <!-- Table class="data-table" -->
-                                        <mat-table matTableExporter [dataSource]="dataSource" #exporter ="matTableExporter" matSort class="data-table" matSortActive="key" matSortDirection="desc">
+                                        <mat-table matTableExporter [hiddenColumns]='[13]'[dataSource]="dataSource" #exporter ="matTableExporter" matSort class="data-table" matSortActive="key" matSortDirection="desc">
 
                                             <!-- ID Column -->
                                             <ng-container matColumnDef="key">
