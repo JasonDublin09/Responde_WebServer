@@ -91,7 +91,7 @@
                         <button class="pure-material-button-contained-decline btn btn-danger text-center" data-toggle="modal" data-target="#exampleModal" type="button">Decline</button>
                     </div>
                     <div class=".col-6 .col-md-4 d-flex justify-content-center " style="margin-right:1%;">
-                        <button class="pure-material-button-contained-respond btn btn-success text-center" (click)="respondReport()">Respond</button>
+                        <button class="pure-material-button-contained-respond btn btn-success text-center" (click)="onSelect(content)">Respond</button>
                     </div>
 
                     <!-- decline modal -->
@@ -162,3 +162,23 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class='modal-title'>Confirm Report</h4>
+        <button type="button" #closebutton class="close" aria-label="Close" data-dismiss="modal" (click)="modal.close('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="modal-body modal-export" style="text-align:center">
+        <p><b>Send Request to other Fire Departments?</b></p>
+
+
+        <button class="pure-material-button-contained-respond btn btn-success text-center"(click)="requestassist()">Yes</button>
+        &nbsp;&nbsp;<button class="pure-material-button-contained-decline btn btn-danger text-center" (click)="sendreport()">No</button>
+    </div>
+    <div class="modal-footer border-top-0 d-flex justify-content-center">
+       
+    </div>
+
+</ng-template>

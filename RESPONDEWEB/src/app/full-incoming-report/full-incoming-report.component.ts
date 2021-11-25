@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { Observable, Subject } from 'rxjs';
@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { AuthService } from '../auth.service';
 import { Loader } from '@googlemaps/js-api-loader';
 import {AngularFireFunctions} from '@angular/fire/functions';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-full-incoming-report',
@@ -13,6 +14,7 @@ import {AngularFireFunctions} from '@angular/fire/functions';
   styleUrls: ['./full-incoming-report.component.css']
 })
 export class FullIncomingReportComponent implements OnInit {
+  @ViewChild('closebutton') closebutton;
 
   map:any;
   lat:any;
@@ -32,11 +34,12 @@ export class FullIncomingReportComponent implements OnInit {
   reasons: any = ['Duplicate Report', 'False Alarm', 'Forwarded to other Station', 'Fake Report'];
 
   reports?: Observable<any[]>;
-  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService, private router: Router, private afFun:AngularFireFunctions) { 
+  constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService, private router: Router, private afFun:AngularFireFunctions,private modalService:NgbModal) { 
   
   }
 
   ngOnInit() {
+    
     
 
     this.reports = this.db.list('IncomingReport').valueChanges();
@@ -117,5 +120,50 @@ export class FullIncomingReportComponent implements OnInit {
   radioChangeHandler (event: any){
     this.selectedReason = event.target.value;
   }
+  onSelect(content){
+   
+    this.modalService.open(content, { centered: true });
+  }
 
+  requestassist(){
+    if (this.report_uid) this.authService.get(this.report_uid).snapshotChanges().subscribe(data => {
+
+      console.log(this.report.emcon)
+      const call = this.afFun.httpsCallable("sendText");
+      const request = this.afFun.httpsCallable("fireText");
+      const confirm = this.afFun.httpsCallable('confirmText')
+
+      
+      request(this.report).subscribe(()=> console.log("send request assist"));
+      //call(this.report).subscribe(()=> console.log("sent report"));
+      //confirm(this.report).subscribe(()=> console.log("sent confirm"));
+      this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+      this.router.navigateByUrl('/incomingreport');
+      this.close();
+
+      
+  }
+    )
+
+     
+  }
+  close(){
+    this.modalService.dismissAll()
+  }
+  sendreport(){
+    if (this.report_uid) this.authService.get(this.report_uid).snapshotChanges().subscribe(data => {
+      
+      console.log(this.report.emcon)
+      const call = this.afFun.httpsCallable("sendText");
+      const confirm = this.afFun.httpsCallable('confirmText');
+
+      call(this.report).subscribe(()=> console.log("sent report"));
+      //confirm(this.report).subscribe(()=> console.log("sent confirm"));
+      this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+      this.router.navigateByUrl('/incomingreport');
+      this.close();
+      
+
+    })
+  }
 }
