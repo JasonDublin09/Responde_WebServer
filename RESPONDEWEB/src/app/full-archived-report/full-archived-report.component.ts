@@ -22,15 +22,12 @@ export class FullArchivedReportComponent implements OnInit {
   public report_contact: any;
   public report_option: any;
   public report_date: any;
-  public report_notes: any;
   public report_email: any;
   public report_status: any;
   public report_reason: any;
 
   report: any;
 
-  detailItems :any[] = [{notes: ""}];
-  //detailItems :any = "";
 
   reports?: Observable<any[]>;
   constructor(private db: AngularFireDatabase, private route: ActivatedRoute, private authService: AuthService) {
@@ -53,12 +50,8 @@ export class FullArchivedReportComponent implements OnInit {
       this.report_option = this.report.option;
       this.report_date = this.report.date;
       this.report_email = this.report.email;
-      this.lng=this.report.lng
-      this.lat= this.report.lat
-      if(this.report.notes != null){
-        this.report_notes = this.report.notes[0].notes;
-      }
-      //this.report_notes = this.report.notes[0].notes;
+      this.lng=this.report.lng;
+      this.lat= this.report.lat;
       if(this.report.status == 'Responded' && this.report.status2 == 'Declined'){
         this.report_status = this.report.status2;
         this.report_reason = this.report.reason;
@@ -87,18 +80,5 @@ export class FullArchivedReportComponent implements OnInit {
 
   }
 
-  editNote(){
-    
-    
-    if(window.confirm('Do you want to save changes to the report notes?')){
-      if (this.report_uid) this.authService.updateNote(this.report_uid, {notes: this.detailItems});
-      this.report_notes = this.detailItems[0].notes;
-      console.log(this.report_notes);
-    }
-  }
-
-  setTitleEdit(item) {
-    item.canEditCode = true;
-  }
 
 }

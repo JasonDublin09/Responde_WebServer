@@ -38,8 +38,6 @@ import { EmailverificationComponent } from './emailverification/emailverificatio
 import { ViewreportsComponent } from './viewreports/viewreports.component';
 import { IncidentReportComponent } from './incident-report/incident-report.component';
 
-import {ClipboardModule} from '@angular/cdk/clipboard';
-
 
 /* Table */
 import {CdkTableModule} from '@angular/cdk/table';
@@ -52,7 +50,6 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatButtonModule } from '@angular/material/button';
 
 /* Form */
-import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 
@@ -101,7 +98,6 @@ export class MaterialModule {}
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ClipboardModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -114,8 +110,6 @@ export class MaterialModule {}
     MatInputModule,
     MatButtonModule,
     MatTableExporterModule,
-
-    MatDatepickerModule,
     
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -137,7 +131,7 @@ export class MaterialModule {}
     ])
     
   ],
-  providers: [AngularFireAuthGuard,AuthService,MatDatepickerModule],
+  providers: [AngularFireAuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -87,28 +87,7 @@
 
                 </div>
 
-                <!-- <h3 class="h3 mb-0" style="margin-top: 3%">Report Notes:</h3> -->
-                <div class="row" style="margin-top: 1%">
 
-                    <div class="col-12 col-sm-6 col-md-8 mb-4" *ngFor="let item of detailItems">
-                        <div class=" border-left-primary card">
-                            <div class="card text-left ">
-                                <div class="card-header">Report Notes
-                                    <small class="pull-right text-primary " style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=true">Edit</small>
-                                    <small class="pull-right text-danger" style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=false">Cancel</small>
-                                    <small class="pull-right text-success " style="margin: 0 0.5rem; cursor: pointer;" (click)="item.canEditCode=false; editNote()">Save</small>
-                                    <small class="pull-right text-secondary" style="margin: 0 0.5rem; cursor: pointer;" [cdkCopyToClipboard]="report_notes">Copy Notes</small>
-
-                                </div>
-                                <div class="card-body">
-                                    <span style="white-space: pre-line" ngDefaultControl [(ngModel)]="report_notes">{{report_notes}}</span>
-                                    <textarea id="tArea" *ngIf="item.canEditCode==true" [(ngModel)]="item.notes" type="text " class="form-control"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
             <!-- End of Main Content -->
 

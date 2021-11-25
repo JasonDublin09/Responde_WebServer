@@ -200,7 +200,7 @@ export class IncidentReportComponent implements AfterViewInit {
     var ws = XLSX.utils.json_to_sheet(this.edata);
     ws['!cols'] = wscols;
     XLSX.utils.book_append_sheet(wb,ws,"IncidentReport");
-    XLSX.writeFile(wb,'IncidentReport.xlsx');
+    XLSX.writeFile(wb,"IncidentReport_"+this.UID.key+".xlsx");
   }
   
 

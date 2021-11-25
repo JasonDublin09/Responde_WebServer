@@ -361,3 +361,10 @@ body {
     color: #333;
     padding-left: 20px;
 }
+
+
+/* export button & contents */
+
+.modal-export label {
+    font-weight: bold!important;
+}
