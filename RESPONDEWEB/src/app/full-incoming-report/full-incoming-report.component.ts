@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import { Loader } from '@googlemaps/js-api-loader';
 import {AngularFireFunctions} from '@angular/fire/functions';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-full-incoming-report',
@@ -133,12 +134,16 @@ export class FullIncomingReportComponent implements OnInit {
       const request = this.afFun.httpsCallable("fireText");
       const confirm = this.afFun.httpsCallable('confirmText')
 
-      
-      request(this.report).subscribe(()=> console.log("send request assist"));
+       request(this.report).subscribe(()=> {
+        console.log("send request assist")
+        confirm(this.report).subscribe(()=> {
+        console.log("sent confirm")
+        call(this.report).subscribe(()=>
+        console.log("eContact Sent"))});
+          });
       //call(this.report).subscribe(()=> console.log("sent report"));
-      //confirm(this.report).subscribe(()=> console.log("sent confirm"));
-      this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
-      this.router.navigateByUrl('/incomingreport');
+       this.authService.get(this.report_uid).update({status: "Responded", status2:"Responded"});
+       this.router.navigateByUrl('/incomingreport');
       this.close();
 
       

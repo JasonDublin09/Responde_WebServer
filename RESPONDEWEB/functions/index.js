@@ -71,12 +71,13 @@ exports.confirmText= functions.https.onCall(async(data,context) => {
   .create({
     body: "The fire station acknowledged the sent report , we are peparing the fire trucks and we will be on our way, keep safe.",
     from: '+18647401105',
-    to:data
-  }).then(message=>console.log(message.sid))
+    to:data.contact
+  }).then(message=>console.log(message.sid)).done()
 })
 
 exports.fireText = functions.https.onCall(async(data,context) =>{
-  const arr = ["+639983740321","+639459777080"]
+  // const arr = ["+639983740321","+639459777080"]
+  const arr = ["+639459777080"]
 
   return Promise.all(arr.map(values=> {
     return client.messages
@@ -84,6 +85,6 @@ exports.fireText = functions.https.onCall(async(data,context) =>{
       body: "Help. A fire has occured at this location " + data.home + ". We request assistance.",
       from: '+18647401105',
       to: values
-    }).then(message=>console.log(message.sid))
+    }).then(message=>console.log(message.sid)).done()
   }))
 });
